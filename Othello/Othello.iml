@@ -7,6 +7,8 @@
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="module" module-name="HexagonalCoordinate" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.46" level="project" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
