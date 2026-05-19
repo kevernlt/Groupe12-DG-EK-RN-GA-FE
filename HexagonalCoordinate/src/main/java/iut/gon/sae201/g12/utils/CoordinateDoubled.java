@@ -26,8 +26,8 @@ public class CoordinateDoubled extends Coordinate {
 
         if (to instanceof CoordinateDoubled toCube) {
 
-            int disX = this.x - toCube.getX();
-            int disY = this.y - toCube.getY();
+            int disX =  toCube.getX() - this.x;
+            int disY =  toCube.getY()- this.y;
 
             if (this.x != toCube.getX() && (Math.abs(disX) != Math.abs(disY))) {
 
@@ -36,7 +36,7 @@ public class CoordinateDoubled extends Coordinate {
             List<Coordinate> ListCo = new ArrayList<>();
 
             if (disX == 0) {
-                for (int i = 1; i < Math.abs(disY); i = i + 2) {
+                for (int i = 2; i < Math.abs(disY); i = i + 2) {
                     if (disY < 0) {
                         ListCo.add(new CoordinateDoubled(this.x, this.y - i));
                     } else {
@@ -63,7 +63,7 @@ public class CoordinateDoubled extends Coordinate {
         if (mode.equals(Mode.FLAT)) {
 
 
-            return this.O(mode);
+            return this.O(Mode.POINTY);
 
         } else {
 
@@ -87,7 +87,7 @@ public class CoordinateDoubled extends Coordinate {
         if (mode.equals(Mode.FLAT)) throw new InvalidParameterException("Tu ne peux pas aller a l'est");
 
 
-        return new CoordinateDoubled(this.x + 2, this.y);
+        return new CoordinateDoubled(this.x , this.y + 2);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class CoordinateDoubled extends Coordinate {
         if (mode.equals(Mode.FLAT)) throw new InvalidParameterException("Tu ne peux pas aller a l'ouest");
 
 
-        return new CoordinateDoubled(this.x - 2, this.y);
+        return new CoordinateDoubled(this.x , this.y - 2);
 
     }
 
@@ -105,7 +105,7 @@ public class CoordinateDoubled extends Coordinate {
         if (mode.equals(Mode.POINTY)) throw new InvalidParameterException("Tu ne peux pas aller au nord");
 
 
-        return this.NO(mode);
+        return this.NO(Mode.POINTY);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class CoordinateDoubled extends Coordinate {
         if (mode.equals(Mode.POINTY)) throw new InvalidParameterException("Tu ne peux pas aller au sud");
 
 
-        return this.SE(mode);
+        return this.SE(Mode.POINTY);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class CoordinateDoubled extends Coordinate {
         if (mode.equals(Mode.FLAT)) {
 
 
-            return this.E(mode);
+            return this.E(Mode.POINTY);
 
         } else {
 
