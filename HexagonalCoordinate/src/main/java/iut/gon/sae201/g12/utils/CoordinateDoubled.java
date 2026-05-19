@@ -65,4 +65,9 @@ public class CoordinateDoubled extends Coordinate {
     public Coordinate SO(Mode mode) {
         return null;
     }
+
+    @Override
+    public Coordinate SE(Mode mode) {
+        return null;
+    }
 }
