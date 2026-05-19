@@ -27,34 +27,6 @@ public class CoordinateCube extends Coordinate {
     }
 
     @Override
-    public Coordinate toDir(Mode mode, Direction direction) {
-
-        return switch (direction) {
-            case NO -> this.NO(mode);
-            case N -> this.N(mode);
-            case NE -> this.NE(mode);
-            case E -> this.E(mode);
-            case SE -> this.SE(mode);
-            case S -> this.S(mode);
-            case SO -> this.SO(mode);
-            case O -> this.O(mode);
-        };
-
-    }
-
-    @Override
-    public List<Coordinate> getNeighbors(Mode mode) {
-
-        List<Coordinate> ListCo = List.of(
-
-                new CoordinateCube(this.q + 1, this.r - 1, this.s), new CoordinateCube(this.q + 1, this.r, this.s - 1), new CoordinateCube(this.q - 1, this.r + 1, this.s), new CoordinateCube(this.q, this.r + 1, this.s - 1), new CoordinateCube(this.q - 1, this.r, this.s + 1), new CoordinateCube(this.q, this.r - 1, this.s + 1)
-
-        );
-
-        return ListCo;
-    }
-
-    @Override
     public List<Coordinate> between(Mode mode, Coordinate to) {
         if (to instanceof CoordinateCube toCube) {
             if (this.s != toCube.getS() && this.q != toCube.getQ() && this.r != toCube.getR()) {
@@ -73,7 +45,7 @@ public class CoordinateCube extends Coordinate {
 
             if (depS == 0) {
 
-                for (int i = 0; i < Math.abs(depQ); i++) {
+                for (int i = 1; i < Math.abs(depQ); i++) {
                     if (depQ < 0) {
 
                         ListCo.add(new CoordinateCube(this.q - i, this.r + i, this.s));
@@ -85,7 +57,7 @@ public class CoordinateCube extends Coordinate {
 
             } else if (depR == 0) {
 
-                for (int i = 0; i < Math.abs(depQ); i++) {
+                for (int i = 1; i < Math.abs(depQ); i++) {
 
                     if (depQ < 0) {
                         ListCo.add(new CoordinateCube(this.q - i, this.r, this.s + i));
@@ -96,7 +68,7 @@ public class CoordinateCube extends Coordinate {
                 }
 
             } else {
-                for (int i = 0; i < Math.abs(depR); i++) {
+                for (int i = 1; i < Math.abs(depR); i++) {
 
                     if (depR < 0) {
                         ListCo.add(new CoordinateCube(this.q, this.r - i, this.s + i));
