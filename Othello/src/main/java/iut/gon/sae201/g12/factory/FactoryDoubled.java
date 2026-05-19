@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class FactoryDoubled implements IFactory {
 
-    private final int[][] boardPoses = {{6, 12}, // on line 0, x cells go from 6 to 12
+    public static final int[][] boardPoses = {{6, 12}, // on line 0, x cells go from 6 to 12
             {3, 15}, // here from 3 to 15
             {2, 16}, // ...
             {1, 17}, {0, 18}, {1, 17}, {0, 18}, {1, 17}, {2, 16}, {3, 15}, {6, 12}};
@@ -44,6 +44,7 @@ public class FactoryDoubled implements IFactory {
         board.replace(new CoordinateDoubled(7,9 ), new Ring(Team.BLACK));
         board.replace(new CoordinateDoubled(8,9 ), new Ring(Team.WHITE));
         board.replace(new CoordinateDoubled(9,9 ), new Ring(Team.WHITE));
+
         return null;
     }
 
