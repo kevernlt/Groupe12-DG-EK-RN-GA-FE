@@ -1,6 +1,9 @@
 package iut.gon.sae201.g12.interfaces;
 
+import iut.gon.sae201.g12.Move;
+import iut.gon.sae201.g12.RemoveLine;
 import iut.gon.sae201.g12.Team;
+import iut.gon.sae201.g12.Token;
 import iut.gon.sae201.g12.utils.Coordinate;
 
 import java.util.List;
@@ -12,9 +15,9 @@ public interface IState {
 
     public IState removeLine(RemoveLine removeLine);
 
-    public Set<Coordinate> availabkeMoves(Coordinate from);
+    public Set<Coordinate> availableMoves(Coordinate from);
 
-    public Map<Coordinate,Token> board();
+    public Map<Coordinate, Token> board();
 
     public Map<Team, List<Coordinate>> rings();
 

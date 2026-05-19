@@ -5,17 +5,8 @@ import iut.gon.sae201.g12.utils.Coordinate;
 
 import java.util.*;
 
-public class State implements IState {
+public record State(Map<Coordinate,Token> board,Team turn,List<Set<Coordinate>> lines) implements IState {
 
-    private Map<Coordinate, Token> board;
-    private Team turn;
-    private List<Set<Coordinate>> lines;
-
-    public State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate>> lines) {
-        this.board = board;
-        this.turn = turn;
-        this.lines = lines;
-    }
 
     public boolean isInField(Coordinate c) {
         return false;
@@ -46,13 +37,13 @@ public class State implements IState {
     }
 
     @Override
-    public Set<Coordinate> availabkeMoves(Coordinate from) {
+    public Set<Coordinate> availableMoves(Coordinate from) {
         return null;
     }
 
     @Override
     public Map<Coordinate, Token> board() {
-        return null;
+        return board;
     }
 
     @Override
