@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HexagonalCoordinate/HexagonalCoordinate.iml" filepath="$PROJECT_DIR$/HexagonalCoordinate/HexagonalCoordinate.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SAE201G12.iml" filepath="$PROJECT_DIR$/SAE201G12.iml" />
     </modules>
   </component>
 </project>
