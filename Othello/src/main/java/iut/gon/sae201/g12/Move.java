@@ -20,11 +20,11 @@ public class Move extends Action {
         return this.to;
     }
 
-    public void SetFrom(Coordinate from) {
-        return true;
+    public Coordinate SetFrom(Coordinate newFrom) {
+        return this.from = newFrom;
     }
 
-    public void SetTo(Coordinate to) {
-        return true;
+    public Coordinate SetTo(Coordinate newTo) {
+        return this.to = newTo;
     }
 }
