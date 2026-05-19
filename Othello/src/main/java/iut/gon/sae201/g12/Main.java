@@ -1,19 +1,47 @@
 package iut.gon.sae201.g12;
 
-import iut.gon.sae201.g12.utils.CoordinateCube;
-import iut.gon.sae201.g12.utils.CoordinateDoubled;
+import iut.gon.sae201.g12.ui.GameManager;
+import iut.gon.sae201.g12.ui.InputManager;
+import iut.gon.sae201.g12.ui.UIUtils;
 import iut.gon.sae201.g12.utils.Mode;
 
 public class Main {
     public static void main(String[] args) {
-        CoordinateCube test1 = new CoordinateCube(0,0,0 );
+        GameManager gameManager = new GameManager();
+        System.out.println("---- Othello ----");
+        System.out.println("---> Sélectionnez l'adverse");
+        System.out.println("1 - Jouer contre un autre joueur");
+        System.out.println("2 - Jouer contre une IA");
+        gameManager.setPlayMode(InputManager.awaitNumberInput() == 1 ? GameManager.PlayMode.PLAYER_VERSUS : GameManager.PlayMode.AI_VERSUS);
 
-        CoordinateCube test2 = new CoordinateCube(0,3,-3);
+        UIUtils.clearTerminal();
+        System.out.println("---> Sélectionnez le mode de plateau");
+        System.out.println("1 - Plat");
+        System.out.println("2 - Pointu");
+        gameManager.setBoardMode(InputManager.awaitNumberInput() == 1 ? Mode.FLAT : Mode.POINTY);
 
-        CoordinateDoubled test3 = new CoordinateDoubled(5,9);
+        UIUtils.clearTerminal();
+        System.out.println("---> Sélectionnez le mode de calcul des positions");
+        System.out.println("1 - CUBE");
+        System.out.println("2 - ROUNDED");
+        gameManager.setDimensionMode(InputManager.awaitNumberInput() == 1 ? GameManager.DimensionMode.CUBE : GameManager.DimensionMode.DOUBLED);
+        gameManager.buildBoardFactory();
+        UIUtils.clearTerminal();
+        System.out.println("---> Plateau IFactory utilisé");
+        System.out.println("1 - testState()");
+        System.out.println("2 - stateForBlackLineTest()");
+        System.out.println("3 - stateForWhiteLineTest()");
+        System.out.println("4 - emptyState()");
+        System.out.println("5 - doubleLineStateTest()");
 
-        CoordinateDoubled test4 = new CoordinateDoubled(9,5);
+        switch (InputManager.awaitNumberInput()) {
+            case 1 -> gameManager.setGameState(gameManager.getFactory().testState());
+            case 2 -> gameManager.setGameState(gameManager.getFactory().stateForBlackLineTest());
+            case 3 -> gameManager.setGameState(gameManager.getFactory().stateForWhiteLineTest());
+            case 4 -> gameManager.setGameState(gameManager.getFactory().emptyState());
+            case 5 -> gameManager.setGameState(gameManager.getFactory().doubleLineStateTest());
+        }
 
-        System.out.println(test1.toString());
+        System.out.println("---- Configuration terminée ----");
     }
 }
