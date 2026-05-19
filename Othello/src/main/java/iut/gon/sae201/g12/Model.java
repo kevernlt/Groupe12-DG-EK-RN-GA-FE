@@ -20,44 +20,44 @@ public class Model {
     }
 
     public Set<Coordinate> movesFrom(Coordinate from, Coordinate to) {
-        /*faire avec State*/ return null;
+        this.currentState.availableMoves(from);
     }
 
     public void moveRing(Coordinate from,Coordinate to){
-        /*IState : move(Coordinate from, Coordinate to)*/
+        Move move = new Move(from,to);
+        this.currentState.move(move);
     }
 
     public List<Set<Coordinate>> getPawnsLines(){
         /*IState : lines()*/
-        return null;
+        return this.currentState.lines();
     }
 
     public void removeLine(Set<Coordinate> line,Coordinate ring){
-        /*IState : removeLine(Set<Coordinate> line, Coordinate ring)*/
+        this.currentState = this.currentState.removeLine(line, ring);
     }
 
     public Map<Coordinate,Token> getBoard(){
         /*IState (currentState) : getBoard()*/
-        return null;
+        return this.currentState.getBoard();
     }
 
-    public Token getToken(Coordinate c){
+    public Token getTokenAt(Coordinate c){
         /* Map : get(Object key)*/
-        return null;
+        return this.getBoard().get(c);
     }
 
     public boolean isInField(Coordinate c){
-        /*Map : constrainKey(Object key)*/
-        return false;
+        return this.getBoard().containsKey(c);
     }
 
     public List<Coordinate> getRings(Team team){
-        /*Map : entrySet(), getValue().getTeam()-->Token*/
+        /*Map : entrySet(), getValue().getTeam()-->Token ALED*/
         return null;
     }
 
     public List<Coordinate> getPawns(Team team){
-        /*IState : lines()*/
+        /*IState : lines()  ALED*/
         return null;
     }
 
