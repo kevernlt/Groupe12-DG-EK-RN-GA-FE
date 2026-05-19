@@ -1,6 +1,7 @@
 package iut.gon.sae201.g12;
 
 import iut.gon.sae201.g12.interfaces.IState;
+import iut.gon.sae201.g12.utils.Coordinate;
 
 import java.util.List;
 import java.util.Set;
