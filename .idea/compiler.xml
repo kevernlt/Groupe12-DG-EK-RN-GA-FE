@@ -9,5 +9,8 @@
         <module name="HexagonalCoordinate" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SAE201G12" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

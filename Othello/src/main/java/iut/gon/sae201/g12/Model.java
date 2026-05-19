@@ -1,6 +1,6 @@
 package iut.gon.sae201.g12;
 
-import iut.gon.sae201.g12.utils.Coordinate;
+import iut.gon.sae201.g12.interfaces.IState;
 
 import java.util.List;
 import java.util.Set;
@@ -8,7 +8,7 @@ import java.util.Set;
 public class Model {
     private IState currentState;
 
-    public Model(Istate state){
+    public Model(IState state){
 
     }
 
