@@ -17,12 +17,29 @@ public class CoordinateCube extends Coordinate {
 
     @Override
     public Point to2DCoordinate() {
-        return null;
+
+        int pointX = this.r + 5;
+
+        int pointY = (this.q + (this.s * -1)) + 9;
+
+        return new Point(pointX, pointY);
+
     }
 
     @Override
     public Coordinate toDir(Mode mode, Direction direction) {
-        return null;
+
+        return switch (direction) {
+            case NO -> this.NO(mode);
+            case N -> this.N(mode);
+            case NE -> this.NE(mode);
+            case E -> this.E(mode);
+            case SE -> this.SE(mode);
+            case S -> this.S(mode);
+            case SO -> this.SO(mode);
+            case O -> this.O(mode);
+        };
+
     }
 
     @Override
@@ -48,6 +65,10 @@ public class CoordinateCube extends Coordinate {
             int depR = this.r - toCube.getR();
             int depS = this.s - toCube.getS();
 
+            if (depQ == 0 && depR == 0 && depS == 0) {
+                return new ArrayList<>();
+            }
+
             List<Coordinate> ListCo = new ArrayList<>();
 
             if (depS == 0) {
@@ -55,8 +76,10 @@ public class CoordinateCube extends Coordinate {
                 for (int i = 0; i < Math.abs(depQ); i++) {
                     if (depQ < 0) {
 
-                    } else {
+                        ListCo.add(new CoordinateCube(this.q - i, this.r + i, this.s));
 
+                    } else {
+                        ListCo.add(new CoordinateCube(this.q + i, this.r - i, this.s));
                     }
                 }
 
@@ -65,9 +88,9 @@ public class CoordinateCube extends Coordinate {
                 for (int i = 0; i < Math.abs(depQ); i++) {
 
                     if (depQ < 0) {
-
+                        ListCo.add(new CoordinateCube(this.q - i, this.r, this.s + i));
                     } else {
-
+                        ListCo.add(new CoordinateCube(this.q + i, this.r, this.s - i));
                     }
 
                 }
@@ -76,9 +99,9 @@ public class CoordinateCube extends Coordinate {
                 for (int i = 0; i < Math.abs(depR); i++) {
 
                     if (depR < 0) {
-
+                        ListCo.add(new CoordinateCube(this.q, this.r - i, this.s + i));
                     } else {
-
+                        ListCo.add(new CoordinateCube(this.q, this.r + i, this.s - i));
                     }
                 }
             }
@@ -94,13 +117,11 @@ public class CoordinateCube extends Coordinate {
 
         if (mode.equals(Mode.FLAT)) {
 
-            if (this.s >= 3 || this.q <= -3) throw new InvalidParameterException("Tu es déjà au bord");
 
             return new CoordinateCube(this.q - 1, this.r, this.s + 1);
 
         } else {
 
-            if (this.s >= 3 || this.r <= -3) throw new InvalidParameterException("Tu es déjà au bord");
 
             return new CoordinateCube(this.q, this.r - 1, this.s + 1);
 
@@ -110,7 +131,7 @@ public class CoordinateCube extends Coordinate {
 
     @Override
     public Coordinate NE(Mode mode) {
-        if (this.q >= 3 || this.r <= -3) throw new InvalidParameterException("Tu es déjà au bord");
+
 
         return new CoordinateCube(this.q + 1, this.r - 1, this.s);
     }
@@ -120,7 +141,6 @@ public class CoordinateCube extends Coordinate {
 
         if (mode.equals(Mode.FLAT)) throw new InvalidParameterException("Tu ne peux pas aller a l'est");
 
-        if (this.q >= 3 || this.s <= -3) throw new InvalidParameterException("Tu es déjà au bord");
 
         return new CoordinateCube(this.q + 1, this.r, this.s - 1);
     }
@@ -130,7 +150,6 @@ public class CoordinateCube extends Coordinate {
 
         if (mode.equals(Mode.FLAT)) throw new InvalidParameterException("Tu ne peux pas aller a l'ouest");
 
-        if (this.s >= 3 || this.q <= -3) throw new InvalidParameterException("Tu es déjà au bord");
 
         return new CoordinateCube(this.q - 1, this.r, this.s + 1);
 
@@ -140,7 +159,6 @@ public class CoordinateCube extends Coordinate {
     public Coordinate N(Mode mode) {
         if (mode.equals(Mode.POINTY)) throw new InvalidParameterException("Tu ne peux pas aller au nord");
 
-        if (this.s >= 3 || this.r <= -3) throw new InvalidParameterException("Tu es déjà au bord");
 
         return new CoordinateCube(this.q, this.r - 1, this.s + 1);
     }
@@ -149,15 +167,13 @@ public class CoordinateCube extends Coordinate {
     public Coordinate S(Mode mode) {
         if (mode.equals(Mode.POINTY)) throw new InvalidParameterException("Tu ne peux pas aller au sud");
 
-        if (this.s <= -3 || this.r >= 3) throw new InvalidParameterException("Tu es déjà au bord");
 
         return new CoordinateCube(this.q, this.r + 1, this.s - 1);
     }
 
-
     @Override
     public Coordinate SO(Mode mode) {
-        if (this.r >= 3 || this.q <= -3) throw new InvalidParameterException("Tu es déjà au bord");
+
 
         return new CoordinateCube(this.q - 1, this.r + 1, this.s);
     }
@@ -166,13 +182,11 @@ public class CoordinateCube extends Coordinate {
     public Coordinate SE(Mode mode) {
         if (mode.equals(Mode.FLAT)) {
 
-            if (this.q >= 3 || this.s <= -3) throw new InvalidParameterException("Tu es déjà au bord");
 
             return new CoordinateCube(this.q + 1, this.r, this.s - 1);
 
         } else {
 
-            if (this.r >= 3 || this.s <= -3) throw new InvalidParameterException("Tu es déjà au bord");
 
             return new CoordinateCube(this.q, this.r + 1, this.s - 1);
 
