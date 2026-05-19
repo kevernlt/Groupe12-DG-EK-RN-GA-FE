@@ -29,7 +29,6 @@ public class Model {
     }
 
     public List<Set<Coordinate>> getPawnsLines(){
-        /*IState : lines()*/
         return this.currentState.lines();
     }
 
@@ -38,12 +37,10 @@ public class Model {
     }
 
     public Map<Coordinate,Token> getBoard(){
-        /*IState (currentState) : getBoard()*/
         return this.currentState.getBoard();
     }
 
     public Token getTokenAt(Coordinate c){
-        /* Map : get(Object key)*/
         return this.getBoard().get(c);
     }
 
