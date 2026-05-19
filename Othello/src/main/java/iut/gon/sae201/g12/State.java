@@ -2,6 +2,7 @@ package iut.gon.sae201.g12;
 
 import iut.gon.sae201.g12.actions.Move;
 import iut.gon.sae201.g12.actions.RemoveLine;
+import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.IState;
 import iut.gon.sae201.g12.utils.Coordinate;
 import iut.gon.sae201.g12.utils.Team;
