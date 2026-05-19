@@ -3,6 +3,7 @@ package iut.gon.sae201.g12.utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 @Getter
@@ -34,7 +35,21 @@ public class CoordinateCube extends Coordinate {
 
     @Override
     public Coordinate NO(Mode mode) {
-        return null;
+
+    if(mode.equals(Mode.FLAT)){
+
+        if( this.s >= 3 || this.q <= -3 ) throw new InvalidParameterException("Tu es déjà au bord");
+
+        return new CoordinateCube(this.q-1,this.r,this.s+1);
+
+    }else{
+
+        if( this.s >= 3 || this.r <= -3 ) throw new InvalidParameterException("Tu es déjà au bord");
+
+        return new CoordinateCube(this.q,this.r-1,this.s+1);
+
+    }
+
     }
 
     @Override
@@ -44,26 +59,64 @@ public class CoordinateCube extends Coordinate {
 
     @Override
     public Coordinate E(Mode mode) {
-        return null;
+
+        if(mode.equals(Mode.FLAT)) throw new InvalidParameterException("Tu ne peux pas aller a l'est");
+
+        if( this.q >= 3 || this.s <= -3 ) throw new InvalidParameterException("Tu es déjà au bord");
+
+        return new CoordinateCube(this.q+1,this.r,this.s-1);
     }
 
     @Override
     public Coordinate O(Mode mode) {
-        return null;
+
+        if(mode.equals(Mode.FLAT)) throw new InvalidParameterException("Tu ne peux pas aller a l'ouest");
+
+        if( this.s >= 3 || this.q <= -3 ) throw new InvalidParameterException("Tu es déjà au bord");
+
+        return new CoordinateCube(this.q-1,this.r,this.s+1);
+
     }
 
     @Override
     public Coordinate N(Mode mode) {
-        return null;
+        if(mode.equals(Mode.POINTY)) throw new InvalidParameterException("Tu ne peux pas aller au nord");
+
+        if( this.s >= 3 || this.r <= -3 ) throw new InvalidParameterException("Tu es déjà au bord");
+
+        return new CoordinateCube(this.q,this.r-1,this.s+1);
     }
 
     @Override
     public Coordinate S(Mode mode) {
-        return null;
+        if(mode.equals(Mode.POINTY)) throw new InvalidParameterException("Tu ne peux pas aller au sud");
+
+        if( this.s <= -3 || this.r >= 3 ) throw new InvalidParameterException("Tu es déjà au bord");
+
+        return new CoordinateCube(this.q,this.r+1,this.s-1);
     }
+
 
     @Override
     public Coordinate SO(Mode mode) {
         return null;
     }
+
+    @Override
+    public Coordinate SE(Mode mode) {
+        if(mode.equals(Mode.FLAT)){
+
+            if( this.q >= 3 || this.s <= -3 ) throw new InvalidParameterException("Tu es déjà au bord");
+
+            return new CoordinateCube(this.q+1,this.r,this.s-1);
+
+        }else{
+
+            if( this.r >= 3 || this.s <= -3 ) throw new InvalidParameterException("Tu es déjà au bord");
+
+            return new CoordinateCube(this.q,this.r+1,this.s-1);
+
+        }
+    }
+
 }
