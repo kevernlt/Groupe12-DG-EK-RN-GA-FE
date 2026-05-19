@@ -33,9 +33,9 @@ public class CoordinateCube extends Coordinate {
                 throw new DifferentAxisExeption("Aucun axe en commun");
             }
 
-            int depQ = this.q - toCube.getQ();
-            int depR = this.r - toCube.getR();
-            int depS = this.s - toCube.getS();
+            int depQ = toCube.getQ() - this.q;
+            int depR = toCube.getR() - this.r;
+            int depS = toCube.getS() - this.s;
 
             if (depQ == 0 && depR == 0 && depS == 0) {
                 return new ArrayList<>();
