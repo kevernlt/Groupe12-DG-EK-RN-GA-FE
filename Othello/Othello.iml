@@ -7,6 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="module" module-name="HexagonalCoordinate" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
