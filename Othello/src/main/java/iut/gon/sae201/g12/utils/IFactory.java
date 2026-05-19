@@ -1,4 +1,4 @@
-package iut.gon.sae201.g12.interfaces;
+package iut.gon.sae201.g12.utils;
 
 public interface IFactory {
     IState testState();

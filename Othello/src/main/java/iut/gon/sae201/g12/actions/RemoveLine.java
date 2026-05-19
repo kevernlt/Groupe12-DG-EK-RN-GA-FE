@@ -1,8 +1,7 @@
-package iut.gon.sae201.g12;
+package iut.gon.sae201.g12.actions;
 
 import iut.gon.sae201.g12.utils.Coordinate;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class RemoveLine extends Action {

@@ -1,6 +1,6 @@
 package iut.gon.sae201.g12.tokens;
 
-import iut.gon.sae201.g12.Team;
+import iut.gon.sae201.g12.utils.Team;
 
 public class Pawn extends Token {
     public Pawn(Team team) {
