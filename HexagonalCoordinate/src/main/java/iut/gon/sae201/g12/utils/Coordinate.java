@@ -14,4 +14,7 @@ public abstract class Coordinate {
     public abstract Coordinate N(Mode mode);
     public abstract Coordinate S(Mode mode);
     public abstract Coordinate SO(Mode mode);
+    public abstract Coordinate SE(Mode mode);
+
+
 }
