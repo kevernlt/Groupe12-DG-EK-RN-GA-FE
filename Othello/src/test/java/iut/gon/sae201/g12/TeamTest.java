@@ -1,8 +1,9 @@
-package iut.gon.sae201.g12.tests;
+package iut.gon.sae201.g12;
 
-import iut.gon.sae201.g12.Team;
+import iut.gon.sae201.g12.utils.Team;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TeamTest {
 
