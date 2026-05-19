@@ -11,6 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Othello" target="21" />
       <module name="SAE201G12" target="1.5" />
     </bytecodeTargetLevel>
   </component>
