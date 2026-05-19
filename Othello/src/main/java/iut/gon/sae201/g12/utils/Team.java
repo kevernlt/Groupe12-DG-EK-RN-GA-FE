@@ -1,4 +1,4 @@
-package iut.gon.sae201.g12;
+package iut.gon.sae201.g12.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

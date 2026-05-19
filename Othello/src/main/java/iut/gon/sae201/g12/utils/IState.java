@@ -1,7 +1,4 @@
-package iut.gon.sae201.g12.interfaces;
-
-import iut.gon.sae201.g12.Team;
-import iut.gon.sae201.g12.utils.Coordinate;
+package iut.gon.sae201.g12.utils;
 
 import java.util.List;
 import java.util.Map;

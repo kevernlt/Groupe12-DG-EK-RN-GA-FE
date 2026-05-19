@@ -1,9 +1,9 @@
-package iut.gon.sae201.g12;
+package iut.gon.sae201.g12.factory;
 
-import iut.gon.sae201.g12.interfaces.IFactory;
-import iut.gon.sae201.g12.interfaces.IState;
+import iut.gon.sae201.g12.utils.IFactory;
+import iut.gon.sae201.g12.utils.IState;
 
-public class FactoryDoubled implements IFactory {
+public class FactoryCube implements IFactory {
 
     @Override
     public IState testState() {
