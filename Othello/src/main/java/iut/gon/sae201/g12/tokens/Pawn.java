@@ -34,6 +34,6 @@ public class Pawn extends Token {
      */
     @Override
     public String charRepr() {
-        return this.team == Team.BLACK ? "x" : ".";
+        return this.team == Team.BLACK ? "\u001B[31mX\u001B[37m" : "\u001B[34mx\u001B[37m";
     }
 }
