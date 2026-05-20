@@ -1,4 +1,4 @@
-package iut.gon.sae201.g12;
+package iut.gon.sae201.g12.state;
 
 import iut.gon.sae201.g12.actions.Move;
 import iut.gon.sae201.g12.actions.RemoveLine;
@@ -97,9 +97,9 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
         if (rings().get(turn).contains(move.getFrom())) throw new IllegalArgumentException();
         if (!isInField(move.getTo())) throw new IndexOutOfBoundsException();
         if (!lines.isEmpty()) throw new RuntimeException();
-        toggleToken(move.getTo(), Ring.class,turn);
+        toggleToken(move.getTo(), Ring.class, this.turn());
         removeToken(move.getFrom());
-        toggleToken(move.getFrom(), Pawn.class,turn);
+        toggleToken(move.getFrom(), Pawn.class, this.turn());
         return new State(board, turn.other(), lines);
     }
 

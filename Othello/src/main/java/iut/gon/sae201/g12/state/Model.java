@@ -1,4 +1,4 @@
-package iut.gon.sae201.g12;
+package iut.gon.sae201.g12.state;
 
 import iut.gon.sae201.g12.actions.Move;
 import iut.gon.sae201.g12.actions.RemoveLine;

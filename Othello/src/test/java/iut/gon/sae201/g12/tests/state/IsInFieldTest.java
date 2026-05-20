@@ -1,6 +1,6 @@
 package iut.gon.sae201.g12.tests.state;
 
-import iut.gon.sae201.g12.State;
+import iut.gon.sae201.g12.state.State;
 import iut.gon.sae201.g12.utils.CoordinateCube;
 import iut.gon.sae201.g12.utils.CoordinateDoubled;
 import org.junit.jupiter.api.Test;

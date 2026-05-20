@@ -1,7 +1,7 @@
 package iut.gon.sae201.g12.ui;
 
-import iut.gon.sae201.g12.Model;
-import iut.gon.sae201.g12.State;
+import iut.gon.sae201.g12.state.Model;
+import iut.gon.sae201.g12.state.State;
 import iut.gon.sae201.g12.actions.Action;
 import iut.gon.sae201.g12.actions.Move;
 import iut.gon.sae201.g12.ai.MinMaxAI;
@@ -11,17 +11,14 @@ import iut.gon.sae201.g12.tokens.Pawn;
 import iut.gon.sae201.g12.tokens.Ring;
 import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.*;
+import iut.gon.sae201.g12.utils.Point;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
-import java.util.List;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class GameManager {
     @Getter
@@ -47,6 +44,7 @@ public class GameManager {
         UIUtils.clearTerminal();
         System.out.println("=== Othello ===\n");
         showPlate();
+        showPlateWithCoo();
 
         if (gameState instanceof State) {
             // Vérifier si les anneaux ont déjà été placés (si le plateau n'est pas vide)
@@ -255,6 +253,7 @@ public class GameManager {
 
                 gameState = currentState;
                 showPlate();
+                showPlateWithCoo();
             }
 
             if (blackRings > 0) {
@@ -281,6 +280,7 @@ public class GameManager {
 
                 gameState = currentState;
                 showPlate();
+                showPlateWithCoo();
             }
         }
         gameState = currentState;

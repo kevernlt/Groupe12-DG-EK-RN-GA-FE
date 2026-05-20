@@ -1,10 +1,8 @@
 package iut.gon.sae201.g12.tests.state;
 
-import iut.gon.sae201.g12.State;
+import iut.gon.sae201.g12.state.State;
 import iut.gon.sae201.g12.actions.RemoveLine;
 import iut.gon.sae201.g12.factory.FactoryCube;
-import iut.gon.sae201.g12.tokens.Pawn;
-import iut.gon.sae201.g12.tokens.Ring;
 import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.*;
 import org.junit.jupiter.api.BeforeEach;

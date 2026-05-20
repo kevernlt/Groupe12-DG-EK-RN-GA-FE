@@ -8,7 +8,7 @@ import iut.gon.sae201.g12.tokens.Token;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-import static iut.gon.sae201.g12.State.isInField;
+import static iut.gon.sae201.g12.state.State.isInField;
 
 /**
  * Interface définissant l'état du jeu Othello.
@@ -132,7 +132,6 @@ public interface IState {
         return line;
     }
 
-    public static boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line, Map<Coordinate, Token> board,Team team) {
     /**
      * Détecte récursivement les lignes de pions dans une direction donnée.
      *
@@ -142,7 +141,7 @@ public interface IState {
      * @param board le plateau de jeu
      * @return {@code true} si une ligne de 5 pions a été détectée, {@code false} sinon
      */
-    public static boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line, Map<Coordinate, Token> board) {
+    public static boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line, Map<Coordinate, Token> board,Team team) {
         if (!isInField(c)) return false;
         Coordinate to = c.toDir(Mode.POINTY, direction);
         if (board.get(to) instanceof Pawn && team==board.get(to).getTeam()) {

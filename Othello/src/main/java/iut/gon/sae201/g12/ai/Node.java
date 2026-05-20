@@ -1,6 +1,6 @@
 package iut.gon.sae201.g12.ai;
 
-import iut.gon.sae201.g12.State;
+import iut.gon.sae201.g12.state.State;
 import iut.gon.sae201.g12.actions.Action;
 import iut.gon.sae201.g12.tokens.Pawn;
 import iut.gon.sae201.g12.tokens.Token;

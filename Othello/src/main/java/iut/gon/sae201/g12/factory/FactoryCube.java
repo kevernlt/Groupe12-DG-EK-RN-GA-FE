@@ -1,6 +1,6 @@
 package iut.gon.sae201.g12.factory;
 
-import iut.gon.sae201.g12.State;
+import iut.gon.sae201.g12.state.State;
 import iut.gon.sae201.g12.tokens.Pawn;
 import iut.gon.sae201.g12.tokens.Ring;
 import iut.gon.sae201.g12.tokens.Token;
