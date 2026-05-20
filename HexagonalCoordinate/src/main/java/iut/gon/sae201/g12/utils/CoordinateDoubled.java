@@ -2,6 +2,7 @@ package iut.gon.sae201.g12.utils;
 
 import iut.gon.sae201.g12.exceptions.DifferentAxisExeption;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.security.InvalidParameterException;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode
 public class CoordinateDoubled extends Coordinate {
     private int x;
     private int y;

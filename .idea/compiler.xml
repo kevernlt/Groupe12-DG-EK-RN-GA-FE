@@ -11,6 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="HexagonalCoordinate" target="17" />
       <module name="Othello" target="17" />
       <module name="SAE201G12" target="1.5" />
     </bytecodeTargetLevel>

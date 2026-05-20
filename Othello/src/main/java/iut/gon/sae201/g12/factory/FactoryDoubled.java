@@ -26,13 +26,11 @@ public class FactoryDoubled implements IFactory {
             }
         }
 
-        return temp.stream()
-                .map(c ->
-                        new CoordinateDoubled(c.getX(), c.getY())
-                )
-                .collect(
-                        Collectors.toMap(c -> c, _var -> null)
-                );
+        Map<Coordinate, Token> map = new HashMap<>();
+        for (CoordinateDoubled c : temp) {
+            map.put(new CoordinateDoubled(c.getX(), c.getY()), null);
+        }
+        return map;
     }
 
     @Override
@@ -181,7 +179,7 @@ public class FactoryDoubled implements IFactory {
         return new State(
                 board,
                 Team.BLACK,
-                new ArrayList<>()
+                IState.getPawnsLines(board)
         );
 
     }
@@ -215,17 +213,17 @@ public class FactoryDoubled implements IFactory {
         board.replace(new CoordinateDoubled(4, 14), new Pawn(Team.WHITE));
         board.replace(new CoordinateDoubled(4, 8), new Pawn(Team.WHITE));
         board.replace(new CoordinateDoubled(4, 6), new Pawn(Team.WHITE));
-        board.replace(new CoordinateDoubled(3, 9), new Pawn(Team.WHITE));
+        board.replace(new CoordinateDoubled(4,10), new Pawn(Team.WHITE));
 
         board.replace(new CoordinateDoubled(3, 5), new Pawn(Team.BLACK));
         board.replace(new CoordinateDoubled(3, 7), new Pawn(Team.BLACK));
         board.replace(new CoordinateDoubled(3, 11), new Pawn(Team.BLACK));
         board.replace(new CoordinateDoubled(3, 13), new Pawn(Team.BLACK));
-        board.replace(new CoordinateDoubled(4, 10), new Pawn(Team.BLACK));
+        board.replace(new CoordinateDoubled(3,9), new Pawn(Team.BLACK));
         return new State(
                 board,
                 Team.BLACK,
-                new ArrayList<>()
+                IState.getPawnsLines(board)
         );
 
     }

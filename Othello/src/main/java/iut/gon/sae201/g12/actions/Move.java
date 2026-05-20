@@ -20,9 +20,9 @@ public class Move extends Action {
         return this.to;
     }
 
-    public void SetFrom(Coordinate from) {
+    public void setFrom(Coordinate from) {
         this.from = from;
     }
 
-    public void SetTo(Coordinate to) {this.to = to;}
+    public void setTo(Coordinate to) {this.to = to;}
 }

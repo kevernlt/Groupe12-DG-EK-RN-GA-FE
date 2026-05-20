@@ -30,20 +30,15 @@ public class FactoryCube implements IFactory {
     }
 
     private Map<Coordinate, Token> initializeEmptyBoard() {
-        Set<CoordinateCube> temp = new HashSet<>();
+        Map<Coordinate, Token> board = new HashMap<>();
 
-        // Board is 11 lines (0-10) like in FactoryDoubled
         for (int i = 0; i <= 10; i++) {
             for (int j = boardPoses[i][0]; j <= boardPoses[i][1]; j += 2) {
-                temp.add(fromDoubled(i, j));
+                board.put(fromDoubled(i, j), null);
             }
         }
 
-        return temp.stream()
-                .map(c -> new CoordinateCube(c.getQ(), c.getR(), c.getS()))
-                .collect(
-                        Collectors.toMap(c -> c, _var -> null)
-                );
+        return board;
     }
 
     @Override
@@ -152,44 +147,18 @@ public class FactoryCube implements IFactory {
         board.replace(fromDoubled(5, 17), new Ring(Team.WHITE));
         board.replace(fromDoubled(6, 12), new Ring(Team.WHITE));
 
-        board.replace(fromDoubled(10, 12), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(9, 3), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(8, 16), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(8, 14), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(8, 12), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(8, 10), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(7, 1), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(7, 11), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(5, 9), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(6, 0), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(6, 2), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(6, 4), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(6, 6), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(6, 8), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(6, 16), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(4, 18), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(4, 16), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(4, 14), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(4, 6), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(4, 8), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(3, 7), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(3, 11), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(2, 6), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(2, 10), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(1, 5), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(1, 9), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(1, 11), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(0, 8), new Pawn(Team.BLACK));
 
-        board.replace(fromDoubled(1, 15), new Pawn(Team.WHITE));
+
+        board.replace(fromDoubled(3, 7), new Pawn(Team.WHITE));
         board.replace(fromDoubled(3, 9), new Pawn(Team.WHITE));
-        board.replace(fromDoubled(8, 6), new Pawn(Team.WHITE));
-        board.replace(fromDoubled(10, 10), new Pawn(Team.WHITE));
+        board.replace(fromDoubled(3, 11), new Pawn(Team.WHITE));
+        board.replace(fromDoubled(3, 13), new Pawn(Team.WHITE));
+        board.replace(fromDoubled(3, 15), new Pawn(Team.WHITE));
 
         return new State(
                 board,
                 Team.BLACK,
-                new ArrayList<>()
+                IState.getPawnsLines(board)
         );
     }
 
@@ -222,17 +191,17 @@ public class FactoryCube implements IFactory {
         board.replace(fromDoubled(4, 14), new Pawn(Team.WHITE));
         board.replace(fromDoubled(4, 8), new Pawn(Team.WHITE));
         board.replace(fromDoubled(4, 6), new Pawn(Team.WHITE));
-        board.replace(fromDoubled(3, 9), new Pawn(Team.WHITE));
+        board.replace(fromDoubled(4, 10), new Pawn(Team.WHITE));
 
         board.replace(fromDoubled(3, 5), new Pawn(Team.BLACK));
         board.replace(fromDoubled(3, 7), new Pawn(Team.BLACK));
         board.replace(fromDoubled(3, 11), new Pawn(Team.BLACK));
         board.replace(fromDoubled(3, 13), new Pawn(Team.BLACK));
-        board.replace(fromDoubled(4, 10), new Pawn(Team.BLACK));
+        board.replace(fromDoubled(3, 9), new Pawn(Team.BLACK));
         return new State(
                 board,
                 Team.BLACK,
-                new ArrayList<>()
+                IState.getPawnsLines(board)
         );
     }
 }
