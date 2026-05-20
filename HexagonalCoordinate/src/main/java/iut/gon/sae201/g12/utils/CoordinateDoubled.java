@@ -8,10 +8,10 @@ import lombok.Getter;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
-@EqualsAndHashCode
 public class CoordinateDoubled extends Coordinate {
     private int x;
     private int y;
@@ -140,4 +140,13 @@ public class CoordinateDoubled extends Coordinate {
         }
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(to2DCoordinate());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj.hashCode() == hashCode();
+    }
 }

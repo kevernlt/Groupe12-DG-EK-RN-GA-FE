@@ -44,7 +44,7 @@ public class IStateTest {
 
     @Test
     public void testGetPawnsLinesDetectsLine() {
-        Coordinate start = new CoordinateDoubled(0, 0);
+        Coordinate start = new CoordinateDoubled(6, 6);
         Map<Coordinate, Token> board = buildBoardWithLine(Team.BLACK, start, Direction.E);
 
         List<Set<Coordinate>> lines = IState.getPawnsLines(board);
@@ -70,7 +70,7 @@ public class IStateTest {
     @Test
     public void testGetPawnsLinesDetectsSixPawnsAsTwoLines() {
         Map<Coordinate, Token> board = new HashMap<>();
-        Coordinate current = new CoordinateDoubled(0, 0);
+        Coordinate current = new CoordinateDoubled(6, 6);
         for (int i = 0; i < 6; i++) {
             board.put(current, new Pawn(Team.BLACK));
             current = current.toDir(Mode.POINTY, Direction.E);
@@ -83,7 +83,7 @@ public class IStateTest {
 
     @Test
     public void testPawnLineReturnsTrueForFivePawns() {
-        Coordinate start = new CoordinateDoubled(0, 0);
+        Coordinate start = new CoordinateDoubled(6, 6);
         Map<Coordinate, Token> board = buildBoardWithLine(Team.BLACK, start, Direction.E);
         Set<Coordinate> line = new HashSet<>();
         line.add(start);
@@ -108,8 +108,8 @@ public class IStateTest {
 
     @Test
     public void testGetPawnsLinesBothTeams() {
-        Coordinate startBlack = new CoordinateDoubled(0, 0);
-        Coordinate startWhite = new CoordinateDoubled(0, 4);
+        Coordinate startBlack = new CoordinateDoubled(6, 0);
+        Coordinate startWhite = new CoordinateDoubled(7, 5);
         Map<Coordinate, Token> board = new HashMap<>();
         board.putAll(buildBoardWithLine(Team.BLACK, startBlack, Direction.E));
         board.putAll(buildBoardWithLine(Team.WHITE, startWhite, Direction.E));

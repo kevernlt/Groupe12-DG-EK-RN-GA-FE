@@ -38,17 +38,20 @@ public interface IState {
             }
         }
         for (Coordinate c : pawn) {
+
             HashSet<Coordinate> tryLine = new HashSet<>();
             tryLine.add(c);
             if (pawnLine(c, Direction.E, tryLine, board)) {
                 line.add(tryLine);
             }
-            tryLine.clear();
+
+            tryLine = new HashSet<>();
             tryLine.add(c);
             if (pawnLine(c, Direction.SE, tryLine, board)) {
                 line.add(tryLine);
             }
-            tryLine.clear();
+
+            tryLine = new HashSet<>();
             tryLine.add(c);
             if (pawnLine(c, Direction.NE, tryLine, board)) {
                 line.add(tryLine);
