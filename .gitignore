@@ -1,4 +1,5 @@
 .mvn/
 **/target/*
 .idea/
+out/
 **/out/*
