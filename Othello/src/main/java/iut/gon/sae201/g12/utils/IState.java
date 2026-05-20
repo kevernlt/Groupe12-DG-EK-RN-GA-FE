@@ -39,7 +39,7 @@ public interface IState {
             }
         }
         for (Coordinate c : pawn) {
-
+            Team teamPawn = board.get(c).getTeam();
             HashSet<Coordinate> tryLine = new HashSet<>();
             tryLine.add(c);
             if (pawnLine(c, Direction.E, tryLine, board,teamPawn)) {

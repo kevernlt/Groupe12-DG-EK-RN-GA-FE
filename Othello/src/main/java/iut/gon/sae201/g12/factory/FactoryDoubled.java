@@ -7,7 +7,6 @@ import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class FactoryDoubled implements IFactory {
 
@@ -34,11 +33,8 @@ public class FactoryDoubled implements IFactory {
     }
 
     @Override
-    public CoordinateCube fromDoubled(int x, int y) {
-        int r = x - 5;
-        int q = (y - x - 4) / 2;
-        int s = -q - r;
-        return new CoordinateCube(q, r, s);
+    public Coordinate fromDoubled(int x, int y) {
+        return new CoordinateDoubled(x, y);
     }
 
     @Override

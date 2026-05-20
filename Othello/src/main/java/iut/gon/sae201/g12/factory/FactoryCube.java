@@ -22,7 +22,7 @@ public class FactoryCube implements IFactory {
      * s = - q - r
      */
     @Override
-    public CoordinateCube fromDoubled(int x, int y) {
+    public Coordinate fromDoubled(int x, int y) {
         int r = x - 5;
         int q = (y - x - 4) / 2;
         int s = -q - r;
