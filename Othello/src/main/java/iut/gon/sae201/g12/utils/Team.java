@@ -1,8 +1,10 @@
 package iut.gon.sae201.g12.utils;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 public enum Team {
     BLACK("\\e[47m"),
     WHITE("\\e[0;37m");
@@ -14,10 +16,6 @@ public enum Team {
     }
 
     Team() {
-    }
-
-    public String getColor() {
-        return color;
     }
 
     public Team other(){
