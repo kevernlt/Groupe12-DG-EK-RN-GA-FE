@@ -110,6 +110,12 @@ public class CoordinateCube extends Coordinate {
     }
 
 
+    /**
+     * Déplace la coordonnée vers le nord-ouest.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     */
     @Override
     public Coordinate NO(Mode mode) {
 
@@ -127,6 +133,12 @@ public class CoordinateCube extends Coordinate {
 
     }
 
+    /**
+     * Déplace la coordonnée vers le nord-est.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     */
     @Override
     public Coordinate NE(Mode mode) {
 

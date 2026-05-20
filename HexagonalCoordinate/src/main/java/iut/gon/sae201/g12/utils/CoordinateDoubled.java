@@ -2,6 +2,11 @@ package iut.gon.sae201.g12.utils;
 
 import iut.gon.sae201.g12.exceptions.DifferentAxisExeption;
 import lombok.AllArgsConstructor;
+    /**
+     * Convertit cette coordonnée en un point 2D simple.
+     *
+     * @return le point correspondant à cette coordonnée
+     */
 import lombok.Getter;
 
 import java.security.InvalidParameterException;
@@ -31,6 +36,12 @@ public class CoordinateDoubled extends Coordinate {
     }
 
     /**
+            /**
+             * Déplace la coordonnée vers le nord-ouest.
+             *
+             * @param mode le mode d'orientation
+             * @return la nouvelle coordonnée
+             */
      * Calcule les coordonnées strictement entre cette coordonnée et {@code to}
      * selon la géométrie "doubled". Lance {@link DifferentAxisExeption} si elles
      * ne sont pas sur un même axe valide.
@@ -93,6 +104,12 @@ public class CoordinateDoubled extends Coordinate {
 
     }
 
+    /**
+     * Déplace la coordonnée vers le nord-est.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     */
     @Override
     public Coordinate NE(Mode mode) {
 
@@ -102,6 +119,10 @@ public class CoordinateDoubled extends Coordinate {
 
     /**
      * Déplacement vers l'est (valide seulement en POINTY).
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     * @throws InvalidParameterException si le déplacement est interdit dans le mode courant
      */
     @Override
     public Coordinate E(Mode mode) {
@@ -114,6 +135,10 @@ public class CoordinateDoubled extends Coordinate {
 
     /**
      * Déplacement vers l'ouest (valide seulement en POINTY).
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     * @throws InvalidParameterException si le déplacement est interdit dans le mode courant
      */
     @Override
     public Coordinate O(Mode mode) {
@@ -133,6 +158,15 @@ public class CoordinateDoubled extends Coordinate {
         return this.NO(Mode.POINTY);
     }
 
+    /**
+     * Déplace la coordonnée vers le sud.
+     *
+     * <p>Cette direction est invalide en mode {@link Mode#POINTY}.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     * @throws InvalidParameterException si le déplacement est interdit dans le mode courant
+     */
     @Override
     public Coordinate S(Mode mode) {
         if (mode.equals(Mode.POINTY)) throw new InvalidParameterException("Tu ne peux pas aller au sud");
@@ -141,6 +175,12 @@ public class CoordinateDoubled extends Coordinate {
         return this.SE(Mode.POINTY);
     }
 
+    /**
+     * Déplace la coordonnée vers le sud-ouest.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     */
     @Override
     public Coordinate SO(Mode mode) {
 
@@ -148,6 +188,14 @@ public class CoordinateDoubled extends Coordinate {
 
     }
 
+    /**
+     * Déplace la coordonnée vers le sud-est.
+     *
+     * <p>La direction dépend du mode d'orientation courant.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     */
     @Override
     public Coordinate SE(Mode mode) {
         if (mode.equals(Mode.FLAT)) {
