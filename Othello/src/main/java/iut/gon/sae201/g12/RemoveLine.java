@@ -1,5 +1,7 @@
 package iut.gon.sae201.g12;
 
+
+import iut.gon.sae201.g12.actions.Action;
 import iut.gon.sae201.g12.utils.Coordinate;
 
 import java.util.HashSet;
@@ -26,6 +28,5 @@ public class RemoveLine extends Action {
         return this.ring;
     }
 
-    public void setRing(Coordinate ring) {this.ring = ring;
-    }
+    public void setRing(Coordinate ring) {this.ring = ring;}
 }

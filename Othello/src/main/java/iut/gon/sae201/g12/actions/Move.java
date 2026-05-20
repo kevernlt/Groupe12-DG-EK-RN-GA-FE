@@ -1,5 +1,5 @@
-package iut.gon.sae201.g12;
-
+package iut.gon.sae201.g12.actions;
+import iut.gon.sae201.g12.actions.Action;
 import iut.gon.sae201.g12.utils.Coordinate;
 
 public class Move extends Action {
