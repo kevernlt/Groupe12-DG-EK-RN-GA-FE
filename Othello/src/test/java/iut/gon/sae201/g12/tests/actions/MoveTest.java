@@ -1,4 +1,4 @@
-package iut.gon.sae201.g12.tests;
+package iut.gon.sae201.g12.tests.actions;
 
 import iut.gon.sae201.g12.actions.Move;
 import iut.gon.sae201.g12.utils.Coordinate;
