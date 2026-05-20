@@ -7,7 +7,6 @@ import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class FactoryCube implements IFactory {
 
@@ -22,7 +21,8 @@ public class FactoryCube implements IFactory {
      * q = (y - x - 4) / 2
      * s = - q - r
      */
-    private CoordinateCube fromDoubled(int x, int y) {
+    @Override
+    public CoordinateCube fromDoubled(int x, int y) {
         int r = x - 5;
         int q = (y - x - 4) / 2;
         int s = -q - r;

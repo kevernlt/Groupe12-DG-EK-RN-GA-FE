@@ -1,5 +1,7 @@
 package iut.gon.sae201.g12.ui;
 
+import iut.gon.sae201.g12.Model;
+import iut.gon.sae201.g12.State;
 import iut.gon.sae201.g12.factory.FactoryCube;
 import iut.gon.sae201.g12.factory.FactoryDoubled;
 import iut.gon.sae201.g12.tokens.Pawn;
@@ -9,6 +11,7 @@ import iut.gon.sae201.g12.utils.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +26,45 @@ public class GameManager {
     Mode boardMode;
     @Setter
     DimensionMode dimensionMode;
+
+    public void start() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        showPlate();
+        Model model = new Model(gameState);
+        if(gameState instanceof State){
+            ringsPlacement(model);
+            while (((State) gameState).winner()==null){
+                if(!model.getPawnsLines().isEmpty()){
+
+                }
+            }
+        }
+
+
+    }
+
+    public void ringsPlacement(Model model) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        int blackPawn = 5;
+        int whitePawn = 5;
+        int x,y;
+        while(whitePawn!=0 || blackPawn!=0){
+            System.out.println("Entrez les coordonées du "+(6-whitePawn)+"e anneau blanc.");
+            System.out.println("x exemple : 0");
+            x=InputManager.awaitNumberInput();
+            System.out.println("y exemple : 6");
+            y=InputManager.awaitNumberInput();
+            model.toggleToken(factory.fromDoubled(x,y),Team.WHITE, Ring.class);
+            whitePawn-=1;
+            showPlate();
+            System.out.println("Entrez les coordonées du "+(6-whitePawn)+"e anneau noir.");
+            System.out.println("x exemple : 0");
+            x=InputManager.awaitNumberInput();
+            System.out.println("y exemple : 6");
+            y=InputManager.awaitNumberInput();
+            model.toggleToken(factory.fromDoubled(x,y),Team.BLACK, Ring.class);
+            blackPawn-=1;
+            showPlate();
+        }
+    }
 
     public void buildBoardFactory() {
         if (this.dimensionMode.equals(DimensionMode.CUBE)) {
@@ -82,5 +124,4 @@ public class GameManager {
         CUBE,
         DOUBLED;
     }
-
 }

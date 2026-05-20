@@ -70,4 +70,12 @@ public class Model {
     public Team getTurn(){
         return this.currentState.turn();
     }
+
+    public void toggleToken(Coordinate position,Team team,Class<? extends Token> token) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        setCurrentState(currentState.toggleToken(position,token,team));
+    }
+
+    public void removeToken(Coordinate c){
+        setCurrentState(currentState.removeToken(c));
+    }
 }

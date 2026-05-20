@@ -137,7 +137,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
 
     @Override
     public List<Set<Coordinate>> lines() {
-        return IState.getPawnsLines(board);
+        return lines;
     }
 
 
@@ -161,7 +161,12 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     public IState toggleToken(Coordinate c, Class<? extends Token> tokenClass, Team team) throws InvocationTargetException, InstantiationException, IllegalAccessException {
         Constructor<?> constructor = tokenClass.getConstructors()[0];
         Token token = (Token) constructor.newInstance(team);
-        if(token.getTeam() == board.get(c).getTeam() && token.getClass() == board.get(c).getClass())removeToken(c);
+        if(token.getTeam() == board.get(c).getTeam() && token.getClass() == board.get(c).getClass()){
+            removeToken(c);
+            return this;
+        }
+        board.remove(c);
+        board.put(c,token);
         return this;
     }
 }

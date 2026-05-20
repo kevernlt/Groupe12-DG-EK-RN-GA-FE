@@ -30,6 +30,14 @@ public class FactoryDoubled implements IFactory {
     }
 
     @Override
+    public CoordinateCube fromDoubled(int x, int y) {
+        int r = x - 5;
+        int q = (y - x - 4) / 2;
+        int s = -q - r;
+        return new CoordinateCube(q, r, s);
+    }
+
+    @Override
     public IState testState() {
         Map<Coordinate, Token> board = initializeEmptyBoard();
 

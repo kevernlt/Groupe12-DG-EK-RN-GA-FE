@@ -20,11 +20,7 @@ public class Main {
         System.out.println("2 - Pointu");
         gameManager.setBoardMode(InputManager.awaitNumberInput() == 1 ? Mode.FLAT : Mode.POINTY);
 
-        UIUtils.clearTerminal();
-        System.out.println("---> Sélectionnez le mode de calcul des positions");
-        System.out.println("1 - CUBE");
-        System.out.println("2 - ROUNDED");
-        gameManager.setDimensionMode(InputManager.awaitNumberInput() == 1 ? GameManager.DimensionMode.CUBE : GameManager.DimensionMode.DOUBLED);
+        gameManager.setDimensionMode(GameManager.DimensionMode.DOUBLED);
         gameManager.buildBoardFactory();
         UIUtils.clearTerminal();
         System.out.println("---> Plateau IFactory utilisé");
