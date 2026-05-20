@@ -63,11 +63,6 @@ public class GameManager {
                 }
             }
         }
-        if (Mode.POINTY == boardMode) {
-
-        } else {
-
-        }
 
     }
 
