@@ -1,6 +1,7 @@
 package iut.gon.sae201.g12.utils;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Coordinate {
     public abstract Point to2DCoordinate();
@@ -64,5 +65,10 @@ public abstract class Coordinate {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Coordinate co && this.to2DCoordinate().equals(co.to2DCoordinate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(to2DCoordinate());
     }
 }
