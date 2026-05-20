@@ -14,6 +14,13 @@ import lombok.Getter;
 
 import java.util.*;
 
+/**
+ * Représente un nœud de l'arbre de jeu pour l'algorithme MinMax.
+ *
+ * <p>Chaque nœud contient un état du jeu, une action qui y a mené et une référence
+ * à son nœud parent. Les nœuds possèdent une fonction d'évaluation pour évaluer
+ * la qualité d'une position.
+ */
 @SuppressWarnings("unused")
 @AllArgsConstructor
 public class Node {
@@ -26,18 +33,39 @@ public class Node {
     private static final Set<Direction> OMITTED_DIRECTIONS_MODE = Set.of(Direction.N, Direction.S);
 
 
+    /**
+     * Crée un nœud racine sans parent.
+     *
+     * @param gameState l'état du jeu
+     */
     public Node(IState gameState) {
         this.gameState = gameState;
     }
 
+    /**
+     * Retourne le nœud parent.
+     *
+     * @return le nœud parent, ou null si c'est la racine
+     */
     public Node getParentNode() {
         return parentNode;
     }
 
+    /**
+     * Évalue ce nœud selon le tour courant.
+     *
+     * @return le score d'évaluation
+     */
     public int evaluate() {
         return evaluate(gameState.turn());
     }
 
+    /**
+     * Évalue ce nœud pour l'équipe de maximisation donnée.
+     *
+     * @param maximizingTeam l'équipe à maximiser
+     * @return le score d'évaluation
+     */
     public int evaluate(Team maximizingTeam) {
         if (!(getGameState() instanceof State st)) {
             return 0;

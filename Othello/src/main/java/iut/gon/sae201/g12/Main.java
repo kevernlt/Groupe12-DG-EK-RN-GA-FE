@@ -5,7 +5,18 @@ import iut.gon.sae201.g12.ui.InputManager;
 import iut.gon.sae201.g12.ui.UIUtils;
 import iut.gon.sae201.g12.utils.Mode;
 
+/**
+ * Point d'entrée du jeu Othello/Reversi.
+ *
+ * <p>Initialise le jeu avec les paramètres configurables : mode de jeu,
+ * mode de plateau hexagonal et système de coordonnées.
+ */
 public class Main {
+    /**
+     * Fonction principale du jeu.
+     *
+     * @param args les arguments de ligne de commande (non utilisés)
+     */
     public static void main(String[] args) {
         GameManager gameManager = new GameManager();
         System.out.println("---- Othello ----");

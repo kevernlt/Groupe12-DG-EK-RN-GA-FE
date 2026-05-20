@@ -16,15 +16,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implémentation d'une IA MinMax pour le jeu Othello.
+ *
+ * <p>Utilise l'algorithme MinMax avec une profondeur limitée pour évaluer
+ * les coups et choisir le meilleur selon une fonction d'évaluation.
+ */
 public class MinMaxAI implements AI {
+    /**
+     * La profondeur maximale de l'arbre de minimax.
+     */
     @Getter
     private final int maxDepth;
     private int opponentDebilness;
 
+    /**
+     * Crée une IA MinMax avec une profondeur donnée.
+     *
+     * @param maxDepth la profondeur maximale de recherche
+     */
     public MinMaxAI(int maxDepth) {
         this.maxDepth = maxDepth;
     }
 
+    /**
+     * Choisit le meilleur coup selon l'algorithme MinMax.
+     *
+     * @param state l'état actuel du jeu
+     * @return l'action (mouvement) sélectionnée
+     * @throws RuntimeException si aucun mouvement n'est disponible
+     */
     @Override
     public Action chooseMove(IState state) throws RuntimeException {
         Team maximizingTeam = state.turn();

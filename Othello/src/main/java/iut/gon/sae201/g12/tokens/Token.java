@@ -9,10 +9,30 @@ import lombok.Setter;
 public abstract class Token implements Cloneable {
     @Getter
     @Setter
+/**
+ * Classe abstraite représentant une pièce du jeu Othello.
+ *
+ * <p>Chaque pièce appartient à une équipe (BLACK ou WHITE) et possède
+ * une représentation textuelle pour l'affichage.
+ */
+    /**
+     * Équipe propriétaire de cette pièce
+     */
     protected Team team;
 
+    /**
+     * Retourne la représentation textuelle/caractère de la pièce.
+     *
+     * @return une chaîne représentant la pièce (ex: "P" pour Pion, "R" pour Ring)
+     */
     public abstract String charRepr();
 
+    /**
+     * Clone cette pièce.
+     *
+     * @return une copie de la pièce
+     * @throws CloneNotSupportedException si le clonage n'est pas supporté
+     */
     @Override
     public Token clone() throws CloneNotSupportedException {
         return (Token) super.clone();

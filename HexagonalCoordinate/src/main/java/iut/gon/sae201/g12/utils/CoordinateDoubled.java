@@ -2,7 +2,6 @@ package iut.gon.sae201.g12.utils;
 
 import iut.gon.sae201.g12.exceptions.DifferentAxisExeption;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.security.InvalidParameterException;
@@ -10,6 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Représentation d'une coordonnée hexagonale en système "doubled" (double coord).
+ * <p>
+ * Le modèle "doubled" stocke deux composantes entières (x, y) et fournit une
+ * conversion simple vers 2D ainsi que les opérations de déplacement adaptées
+ * selon le {@link Mode}.
+ */
 @Getter
 @AllArgsConstructor
 public class CoordinateDoubled extends Coordinate {
@@ -23,6 +29,16 @@ public class CoordinateDoubled extends Coordinate {
 
     }
 
+    /**
+     * Calcule les coordonnées strictement entre cette coordonnée et {@code to}
+     * selon la géométrie "doubled". Lance {@link DifferentAxisExeption} si elles
+     * ne sont pas sur un même axe valide.
+     *
+     * @param mode non utilisé par cette implémentation
+     * @param to   coordonnée cible
+     * @return la liste des coordonnées intermédiaires
+     * @throws DifferentAxisExeption si les deux coordonnées n'ont pas d'axe commun
+     */
     @Override
     public List<Coordinate> between(Mode mode, Coordinate to) {
 
@@ -76,6 +92,12 @@ public class CoordinateDoubled extends Coordinate {
 
     }
 
+    /**
+     * Déplace la coordonnée vers le nord-est.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     */
     @Override
     public Coordinate NE(Mode mode) {
 
@@ -83,6 +105,13 @@ public class CoordinateDoubled extends Coordinate {
         return new CoordinateDoubled(this.x - 1, this.y + 1);
     }
 
+    /**
+     * Déplacement vers l'est (valide seulement en POINTY).
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     * @throws InvalidParameterException si le déplacement est interdit dans le mode courant
+     */
     @Override
     public Coordinate E(Mode mode) {
 
@@ -92,6 +121,13 @@ public class CoordinateDoubled extends Coordinate {
         return new CoordinateDoubled(this.x , this.y + 2);
     }
 
+    /**
+     * Déplacement vers l'ouest (valide seulement en POINTY).
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     * @throws InvalidParameterException si le déplacement est interdit dans le mode courant
+     */
     @Override
     public Coordinate O(Mode mode) {
 
@@ -110,6 +146,15 @@ public class CoordinateDoubled extends Coordinate {
         return this.NO(Mode.POINTY);
     }
 
+    /**
+     * Déplace la coordonnée vers le sud.
+     *
+     * <p>Cette direction est invalide en mode {@link Mode#POINTY}.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     * @throws InvalidParameterException si le déplacement est interdit dans le mode courant
+     */
     @Override
     public Coordinate S(Mode mode) {
         if (mode.equals(Mode.POINTY)) throw new InvalidParameterException("Tu ne peux pas aller au sud");
@@ -118,6 +163,12 @@ public class CoordinateDoubled extends Coordinate {
         return this.SE(Mode.POINTY);
     }
 
+    /**
+     * Déplace la coordonnée vers le sud-ouest.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     */
     @Override
     public Coordinate SO(Mode mode) {
 
@@ -125,6 +176,14 @@ public class CoordinateDoubled extends Coordinate {
 
     }
 
+    /**
+     * Déplace la coordonnée vers le sud-est.
+     *
+     * <p>La direction dépend du mode d'orientation courant.
+     *
+     * @param mode le mode d'orientation
+     * @return la nouvelle coordonnée
+     */
     @Override
     public Coordinate SE(Mode mode) {
         if (mode.equals(Mode.FLAT)) {
