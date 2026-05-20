@@ -15,4 +15,17 @@ public class InputManager {
         }
         return input;
     }
+
+    public static char awaitCharInput() {
+        Scanner scanner = new Scanner(System.in);
+        char input = (char) -1;
+        while (input == (char) -1) {
+            try {
+                input = scanner.nextLine().charAt(0);
+            } catch (NumberFormatException e) {
+                System.out.println("Veuillez entrer un nombre valide.");
+            }
+        }
+        return input;
+    }
 }
