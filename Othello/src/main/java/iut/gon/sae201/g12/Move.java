@@ -24,5 +24,5 @@ public class Move extends Action {
         this.from = from;
     }
 
-    public void SetTo(Coordinate to) {this.to = to; }
+    public void SetTo(Coordinate to) {this.to = to;}
 }

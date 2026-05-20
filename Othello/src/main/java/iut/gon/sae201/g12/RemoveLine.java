@@ -26,7 +26,6 @@ public class RemoveLine extends Action {
         return this.ring;
     }
 
-    public void setRing(Coordinate ring) {
-        this.ring = ring;
+    public void setRing(Coordinate ring) {this.ring = ring;
     }
 }

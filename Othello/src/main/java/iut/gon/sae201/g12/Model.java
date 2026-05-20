@@ -33,8 +33,7 @@ public class Model {
     }
 
     public List<Set<Coordinate>> getPawnsLines(){
-        return this.currentState.lines();
-    }
+        return this.currentState.lines();    }
 
     public void removeLine(Set<Coordinate> line,Coordinate ring){
         this.currentState = this.currentState.removeLine(line, ring);
