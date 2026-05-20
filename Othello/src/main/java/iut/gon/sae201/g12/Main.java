@@ -5,19 +5,10 @@ import iut.gon.sae201.g12.ui.InputManager;
 import iut.gon.sae201.g12.ui.UIUtils;
 import iut.gon.sae201.g12.utils.Mode;
 
-/**
- * Point d'entrée du jeu Othello/Reversi.
- *
- * <p>Initialise le jeu avec les paramètres configurables : mode de jeu,
- * mode de plateau hexagonal et système de coordonnées.
- */
+import java.lang.reflect.InvocationTargetException;
+
 public class Main {
-    /**
-     * Fonction principale du jeu.
-     *
-     * @param args les arguments de ligne de commande (non utilisés)
-     */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         GameManager gameManager = new GameManager();
         System.out.println("---- Othello ----");
         System.out.println("---> Sélectionnez l'adverse");
@@ -31,11 +22,7 @@ public class Main {
         System.out.println("2 - Pointu");
         gameManager.setBoardMode(InputManager.awaitNumberInput() == 1 ? Mode.FLAT : Mode.POINTY);
 
-        UIUtils.clearTerminal();
-        System.out.println("---> Sélectionnez le mode de calcul des positions");
-        System.out.println("1 - CUBE");
-        System.out.println("2 - ROUNDED");
-        gameManager.setDimensionMode(InputManager.awaitNumberInput() == 1 ? GameManager.DimensionMode.CUBE : GameManager.DimensionMode.DOUBLED);
+        gameManager.setDimensionMode(GameManager.DimensionMode.DOUBLED);
         gameManager.buildBoardFactory();
         UIUtils.clearTerminal();
         System.out.println("---> Plateau IFactory utilisé");
@@ -44,6 +31,7 @@ public class Main {
         System.out.println("3 - stateForWhiteLineTest()");
         System.out.println("4 - emptyState()");
         System.out.println("5 - doubleLineStateTest()");
+        System.out.println("6 - Placement manuel");
 
         switch (InputManager.awaitNumberInput()) {
             case 1 -> gameManager.setGameState(gameManager.getFactory().testState());
@@ -51,10 +39,12 @@ public class Main {
             case 3 -> gameManager.setGameState(gameManager.getFactory().stateForWhiteLineTest());
             case 4 -> gameManager.setGameState(gameManager.getFactory().emptyState());
             case 5 -> gameManager.setGameState(gameManager.getFactory().doubleLineStateTest());
+            case 6 -> gameManager.setGameState(gameManager.ringsPlacement());
         }
 
         System.out.println("---- Configuration terminée ----");
 
         gameManager.showPlate();
+        gameManager.start();
     }
 }

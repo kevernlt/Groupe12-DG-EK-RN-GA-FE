@@ -110,28 +110,29 @@ public interface IState {
             }
         }
         for (Coordinate c : pawn) {
-
+            Team teamPawn = board.get(c).getTeam();
             HashSet<Coordinate> tryLine = new HashSet<>();
             tryLine.add(c);
-            if (pawnLine(c, Direction.E, tryLine, board)) {
+            if (pawnLine(c, Direction.E, tryLine, board,teamPawn)) {
                 line.add(tryLine);
             }
 
             tryLine = new HashSet<>();
             tryLine.add(c);
-            if (pawnLine(c, Direction.SE, tryLine, board)) {
+            if (pawnLine(c, Direction.SE, tryLine, board,teamPawn)) {
                 line.add(tryLine);
             }
 
             tryLine = new HashSet<>();
             tryLine.add(c);
-            if (pawnLine(c, Direction.NE, tryLine, board)) {
+            if (pawnLine(c, Direction.NE, tryLine, board,teamPawn)) {
                 line.add(tryLine);
             }
         }
         return line;
     }
 
+    public static boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line, Map<Coordinate, Token> board,Team team) {
     /**
      * Détecte récursivement les lignes de pions dans une direction donnée.
      *
@@ -144,12 +145,12 @@ public interface IState {
     public static boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line, Map<Coordinate, Token> board) {
         if (!isInField(c)) return false;
         Coordinate to = c.toDir(Mode.POINTY, direction);
-        if (board.get(to) instanceof Pawn) {
+        if (board.get(to) instanceof Pawn && team==board.get(to).getTeam()) {
             line.add(to);
             if (line.size() == 5) {
                 return true;
             } else {
-                return pawnLine(to, direction, line, board);
+                return pawnLine(to, direction, line, board,team);
             }
         }
         return false;

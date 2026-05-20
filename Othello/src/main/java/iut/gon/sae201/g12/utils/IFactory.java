@@ -4,9 +4,18 @@ package iut.gon.sae201.g12.utils;
  * Interface pour la création d'états de jeu Othello à des fins de test.
  *
  * <p>Les implémentations fournissent des états préconfigurés pour tester
- * différents scénarios du jeu.
+ * différents scénarios du jeu et permettent la conversion de coordonnées.
  */
 public interface IFactory {
+    /**
+     * Convertit des coordonnées "doubled" (2D) en coordonnées du système utilisé.
+     *
+     * @param x la coordonnée x en système doubled
+     * @param y la coordonnée y en système doubled
+     * @return la coordonnée convertie
+     */
+    Coordinate fromDoubled(int x, int y);
+
     /**
      * Crée un état de test standard.
      *

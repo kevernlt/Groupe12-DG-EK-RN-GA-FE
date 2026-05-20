@@ -7,7 +7,6 @@ import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Factory pour créer des états de test en utilisant le modèle hexagonal Doubled.
@@ -37,6 +36,11 @@ public class FactoryDoubled implements IFactory {
             map.put(new CoordinateDoubled(c.getX(), c.getY()), null);
         }
         return map;
+    }
+
+    @Override
+    public Coordinate fromDoubled(int x, int y) {
+        return new CoordinateDoubled(x, y);
     }
 
     @Override

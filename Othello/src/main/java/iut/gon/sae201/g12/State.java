@@ -93,14 +93,14 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
      */
     @Override
     public IState move(Move move) throws RuntimeException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        if (!availableMoves(move.getFrom()).contains(move.getTo())) throw new IllegalArgumentException("Mouvement invalide");
-        if (rings().get(turn).contains(move.getFrom())) throw new IllegalArgumentException("Mouvement invalide");
-        if (isInField(move.getTo())) throw new IndexOutOfBoundsException("Mouvement invalide");
-        if (!(lines == null)) throw new RuntimeException();
+        if (!availableMoves(move.getFrom()).contains(move.getTo())) throw new IllegalArgumentException();
+        if (rings().get(turn).contains(move.getFrom())) throw new IllegalArgumentException();
+        if (!isInField(move.getTo())) throw new IndexOutOfBoundsException();
+        if (!lines.isEmpty()) throw new RuntimeException();
         toggleToken(move.getTo(), Ring.class,turn);
         removeToken(move.getFrom());
         toggleToken(move.getFrom(), Pawn.class,turn);
-        return this;
+        return new State(board, turn.other(), lines);
     }
 
     /**
@@ -129,7 +129,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
             removeToken(c);
         }
         removeToken(removeLine.getRing());
-        return this;
+        return new State(board, turn.other(), lines);
     }
 
     /**
@@ -244,7 +244,13 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     public IState toggleToken(Coordinate c, Class<? extends Token> tokenClass, Team team) throws InvocationTargetException, InstantiationException, IllegalAccessException {
         Constructor<?> constructor = tokenClass.getConstructors()[0];
         Token token = (Token) constructor.newInstance(team);
-        if(token.getTeam() == board.get(c).getTeam() && token.getClass() == board.get(c).getClass())removeToken(c);
+        Token existingToken = board.get(c);
+        if(existingToken != null && token.getTeam() == existingToken.getTeam() && token.getClass() == existingToken.getClass()){
+            removeToken(c);
+            return this;
+        }
+        board.remove(c);
+        board.put(c,token);
         return this;
     }
 }
