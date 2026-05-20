@@ -24,5 +24,7 @@ public class MainAI {
         MinMaxAI ai = new MinMaxAI(5);
         Action chosen = ai.chooseMove(state);
         System.out.println("Coup choisi: " + chosen);
+
+        // ⚠️⚠️ LE MAIN N'EST PAS ICI
     }
 }
