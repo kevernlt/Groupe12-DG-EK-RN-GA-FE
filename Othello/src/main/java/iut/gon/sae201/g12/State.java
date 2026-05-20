@@ -1,14 +1,13 @@
 package iut.gon.sae201.g12;
 
 import iut.gon.sae201.g12.interfaces.IState;
-import iut.gon.sae201.g12.utils.Coordinate;
-import iut.gon.sae201.g12.utils.Direction;
-import iut.gon.sae201.g12.utils.Mode;
+import iut.gon.sae201.g12.utils.*;
 
 import java.util.*;
 
 public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate>> lines) implements IState {
     public boolean isInField(Coordinate c) {
+        if(board.containsKey(c))return true;
         return false;
     }
 
@@ -91,7 +90,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
         } else {
             pion=true;
         }
-        keepGoing(coordsSet, from, direction,pion);
+        keepGoing(coordsSet, to, direction,pion);
     }
 
 
@@ -116,11 +115,29 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
 
     @Override
     public List<Set<Coordinate>> lines() {
-        HashSet<Coordinate> line = new HashSet<>();
-        for
+        ArrayList<Set<Coordinate>> line = new ArrayList<>();
+        for(int r=-5;r<=5;r++){
+            for(int q=-5;q<=5;q++){
+                for(int s=-5;s<=5;s++){
+                    HashSet<Coordinate> tryLine = new HashSet<>();
+                    Coordinate c = new CoordinateCube(q,r,s);
+                    if(pawnLine(c,Direction.E,tryLine)){
+                        line.add(tryLine);
+                    }
+                    if(pawnLine(c,Direction.SE,tryLine)){
+                        line.add(tryLine);
+                    }
+                    if(pawnLine(c,Direction.NE,tryLine)){
+                        line.add(tryLine);
+                    }
+                }
+            }
+        }
+        return line;
     }
 
     public boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line){
+        if(!isInField(c))return false;
         Coordinate to = c.toDir(Mode.POINTY,direction);
         if(board.get(to)instanceof Pawn){
             line.add(to);
