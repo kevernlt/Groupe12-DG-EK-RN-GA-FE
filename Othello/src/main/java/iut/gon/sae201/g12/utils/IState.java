@@ -1,10 +1,8 @@
-package iut.gon.sae201.g12.interfaces;
+package iut.gon.sae201.g12.utils;
 
-import iut.gon.sae201.g12.Move;
-import iut.gon.sae201.g12.RemoveLine;
-import iut.gon.sae201.g12.Team;
-import iut.gon.sae201.g12.Token;
-import iut.gon.sae201.g12.utils.Coordinate;
+import iut.gon.sae201.g12.actions.Move;
+import iut.gon.sae201.g12.actions.RemoveLine;
+import iut.gon.sae201.g12.tokens.Token;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +25,7 @@ public interface IState {
 
     public IState removeToken(Coordinate c);
 
-    public IState toggleToken(Coordinate c, Class<Token> tokenClass,Team team);
+    public IState toggleToken(Coordinate c, Class<Token> tokenClass, Team team);
 
     public static List<Set<Coordinate>> getPawnsLines(Map<Coordinate, Token> board) {
         return null;

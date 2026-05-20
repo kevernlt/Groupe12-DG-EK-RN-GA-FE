@@ -1,15 +1,18 @@
 package iut.gon.sae201.g12;
 
-import iut.gon.sae201.g12.interfaces.IState;
-import iut.gon.sae201.g12.utils.Coordinate;
-import iut.gon.sae201.g12.utils.Direction;
-import iut.gon.sae201.g12.utils.Mode;
+
+import iut.gon.sae201.g12.actions.Move;
+import iut.gon.sae201.g12.actions.RemoveLine;
+import iut.gon.sae201.g12.tokens.Pawn;
+import iut.gon.sae201.g12.tokens.Ring;
+import iut.gon.sae201.g12.tokens.Token;
+import iut.gon.sae201.g12.utils.*;
 
 import java.util.*;
 
 public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate>> lines) implements IState {
     public boolean isInField(Coordinate c) {
-        return false;
+        return board.containsKey(c);
     }
 
     public Team winner() {
@@ -40,10 +43,10 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
         if (!availableMoves(move.getFrom()).contains(move.getTo())) throw new IllegalArgumentException();
         if (rings().get(turn).contains(move.getFrom())) throw new IllegalArgumentException();
         if (isInField(move.getTo())) throw new IndexOutOfBoundsException();
-        if (!getPawnsLines(board) == null) throw new RuntimeException();
-        toggleToken(move.getTo(), turn,//ring);
-        removeToken(move.getFrom());
-        toggleToken(move.getFrom(), turn,//pawn);
+        if (!(IState.getPawnsLines(board) == null)) throw new RuntimeException();
+//        toggleToken(move.getTo(), turn,//ring);
+//        removeToken(move.getFrom());
+//        toggleToken(move.getFrom(), turn,//pawn);
         return this;
     }
 
@@ -77,7 +80,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
         keepGoing(moves,from,Direction.NE,false);
         keepGoing(moves,from,Direction.NO,false);
         keepGoing(moves,from,Direction.SO,false);
-        keepGoing(moves,from,Direction.SE,false);
+        keepGoing(moves,from, Direction.SE,false);
         return moves;
     }
 
@@ -117,7 +120,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     @Override
     public List<Set<Coordinate>> lines() {
         HashSet<Coordinate> line = new HashSet<>();
-        for
+        return lines;
     }
 
     public boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line){
@@ -150,6 +153,6 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
 
     @Override
     public IState toggleToken(Coordinate c, Class<Token> tokenClass, Team team) {
-        return null;
+        return this;
     }
 }

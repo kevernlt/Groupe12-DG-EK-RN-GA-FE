@@ -5,7 +5,6 @@ import iut.gon.sae201.g12.actions.Move;
 import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.Coordinate;
 import iut.gon.sae201.g12.utils.IState;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -35,8 +34,11 @@ public class MinMaxAI implements AI {
         List<Node> childs = new ArrayList<>();
         IState currentState = root.getGameState();
 
-        for(Map.Entry<Coordinate, Token> tokensOfCurrentPlayer : currentState.board().entrySet().stream().filter(entry -> entry.getValue().getTeam() == currentState.turn()).toList()) {
-            for (Coordinate move : currentState.availabkeMoves(tokensOfCurrentPlayer.getKey())) {
+        for (Map.Entry<Coordinate, Token> tokensOfCurrentPlayer : currentState.board()
+                .entrySet().stream().filter(
+                        entry -> entry.getValue() != null && entry.getValue().getTeam() == currentState.turn()).toList()
+        ) {
+            for (Coordinate move : currentState.availableMoves(tokensOfCurrentPlayer.getKey())) {
                 Move moveAction = new Move(tokensOfCurrentPlayer.getKey(), move);
                 childs.add(new Node(currentState.move(moveAction), root, moveAction));
             }
