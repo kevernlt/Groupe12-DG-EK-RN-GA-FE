@@ -1,5 +1,8 @@
 package iut.gon.sae201.g12.utils;
 
+/**
+ * Enumération des 8 directions utilisées pour naviguer sur une grille hexagonale.
+ */
 public enum Direction {
     NO,
     N,
@@ -10,6 +13,11 @@ public enum Direction {
     SO,
     O;
 
+    /**
+     * Retourne la direction opposée à celle-ci.
+     *
+     * @return la direction opposée
+     */
     public Direction opposite() {
         return switch (this) {
             case NO -> SE;

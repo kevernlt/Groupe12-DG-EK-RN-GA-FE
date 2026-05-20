@@ -8,10 +8,19 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Représentation d'une coordonnée hexagonale en système "doubled" (double coord).
+ * <p>
+ * Le modèle "doubled" stocke deux composantes entières (x, y) et fournit une
+ * conversion simple vers 2D ainsi que les opérations de déplacement adaptées
+ * selon le {@link Mode}.
+ */
 @Getter
 @AllArgsConstructor
 public class CoordinateDoubled extends Coordinate {
+    /** composante x */
     private int x;
+    /** composante y */
     private int y;
 
     @Override
@@ -21,6 +30,16 @@ public class CoordinateDoubled extends Coordinate {
 
     }
 
+    /**
+     * Calcule les coordonnées strictement entre cette coordonnée et {@code to}
+     * selon la géométrie "doubled". Lance {@link DifferentAxisExeption} si elles
+     * ne sont pas sur un même axe valide.
+     *
+     * @param mode non utilisé par cette implémentation
+     * @param to   coordonnée cible
+     * @return la liste des coordonnées intermédiaires
+     * @throws DifferentAxisExeption si les deux coordonnées n'ont pas d'axe commun
+     */
     @Override
     public List<Coordinate> between(Mode mode, Coordinate to) {
 
@@ -81,6 +100,9 @@ public class CoordinateDoubled extends Coordinate {
         return new CoordinateDoubled(this.x - 1, this.y + 1);
     }
 
+    /**
+     * Déplacement vers l'est (valide seulement en POINTY).
+     */
     @Override
     public Coordinate E(Mode mode) {
 
@@ -90,6 +112,9 @@ public class CoordinateDoubled extends Coordinate {
         return new CoordinateDoubled(this.x , this.y + 2);
     }
 
+    /**
+     * Déplacement vers l'ouest (valide seulement en POINTY).
+     */
     @Override
     public Coordinate O(Mode mode) {
 

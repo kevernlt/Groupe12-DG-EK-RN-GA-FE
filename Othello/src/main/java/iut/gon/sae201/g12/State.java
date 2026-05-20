@@ -58,9 +58,9 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
 
     @Override
     public IState move(Move move) throws RuntimeException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        if (!availableMoves(move.getFrom()).contains(move.getTo())) throw new IllegalArgumentException();
-        if (rings().get(turn).contains(move.getFrom())) throw new IllegalArgumentException();
-        if (isInField(move.getTo())) throw new IndexOutOfBoundsException();
+        if (!availableMoves(move.getFrom()).contains(move.getTo())) throw new IllegalArgumentException("Mouvement invalide");
+        if (rings().get(turn).contains(move.getFrom())) throw new IllegalArgumentException("Mouvement invalide");
+        if (isInField(move.getTo())) throw new IndexOutOfBoundsException("Mouvement invalide");
         if (!(lines == null)) throw new RuntimeException();
         toggleToken(move.getTo(), Ring.class,turn);
         removeToken(move.getFrom());
@@ -71,9 +71,9 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     @Override
     @SuppressWarnings("suspicious")
     public IState removeLine(RemoveLine removeLine) throws RuntimeException {
-        if (removeLine == null) throw new RuntimeException();
-        if (removeLine.getLine() == null) throw new RuntimeException();
-        if (removeLine.getLine().size() != 5) throw new RuntimeException();
+        if (removeLine == null) throw new RuntimeException("Cette ligne ne peut pas être suprimer");
+        if (removeLine.getLine() == null) throw new RuntimeException("Cette ligne ne peut pas être suprimer");
+        if (removeLine.getLine().size() != 5) throw new RuntimeException("Cette ligne ne peut pas être suprimer");
         Team t = board.get((Coordinate) removeLine.getLine().toArray()[0]).getTeam();
         for (Coordinate c : removeLine.getLine()) {
             if (board.get(c).getTeam() != t) {
@@ -81,7 +81,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
             }
         }
         for (Coordinate c : removeLine.getLine()) {
-            if (!isInField(c)) throw new RuntimeException();
+            if (!isInField(c)) throw new RuntimeException("Erreur sur la position");
         }
         for (Coordinate c : removeLine.getLine()) {
             removeToken(c);

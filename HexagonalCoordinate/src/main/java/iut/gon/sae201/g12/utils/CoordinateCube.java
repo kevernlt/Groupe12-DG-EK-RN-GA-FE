@@ -8,13 +8,30 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Représentation d'une coordonnée hexagonale en coordonnées "cube".
+ * <p>
+ * Le système cube utilise trois coordonnées (q, r, s) telles que q + r + s == 0
+ * pour représenter des positions sur une grille hexagonale. Cette classe fournit
+ * les opérations de déplacement et le calcul des positions intermédiaires le long
+ * d'un axe.
+ */
 @Getter
 @AllArgsConstructor
 public class CoordinateCube extends Coordinate {
+    /** composante q du système cube */
     private int q;
+    /** composante r du système cube */
     private int r;
+    /** composante s du système cube */
     private int s;
 
+    /**
+     * Conversion simple vers une position 2D (pour affichage/tests). La transformation
+     * actuelle est arbitraire et correspond à l'implémentation utilisée par le sujet.
+     *
+     * @return le {@link Point} 2D associé
+     */
     @Override
     public Point to2DCoordinate() {
 
@@ -26,6 +43,15 @@ public class CoordinateCube extends Coordinate {
 
     }
 
+    /**
+     * Calcule les coordonnées strictement entre cette coordonnée et {@code to}
+     * si elles partagent un axe. Lance {@link DifferentAxisExeption} sinon.
+     *
+     * @param mode non utilisé par cette implémentation (présent pour compatibilité)
+     * @param to   coordonnée cible
+     * @return la liste des coordonnées entre les deux
+     * @throws DifferentAxisExeption si les deux coordonnées n'ont pas d'axe commun
+     */
     @Override
     public List<Coordinate> between(Mode mode, Coordinate to) {
         if (to instanceof CoordinateCube toCube) {
@@ -108,6 +134,10 @@ public class CoordinateCube extends Coordinate {
         return new CoordinateCube(this.q + 1, this.r - 1, this.s);
     }
 
+    /**
+     * Déplacement vers l'est. Pour le mode FLAT cette opération est invalide
+     * et provoque une {@link InvalidParameterException}.
+     */
     @Override
     public Coordinate E(Mode mode) {
 
@@ -117,6 +147,10 @@ public class CoordinateCube extends Coordinate {
         return new CoordinateCube(this.q + 1, this.r, this.s - 1);
     }
 
+    /**
+     * Déplacement vers l'ouest. Pour le mode FLAT cette opération est invalide
+     * et provoque une {@link InvalidParameterException}.
+     */
     @Override
     public Coordinate O(Mode mode) {
 
