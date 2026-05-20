@@ -88,7 +88,7 @@ public class IStateTest {
         Set<Coordinate> line = new HashSet<>();
         line.add(start);
 
-        boolean result = IState.pawnLine(start, Direction.E, line, board);
+        boolean result = IState.pawnLine(start, Direction.E, line, board, Team.BLACK);
 
         assertTrue(result, "pawnLine doit retourner true pour une ligne de 5 pions.");
     }
@@ -101,7 +101,7 @@ public class IStateTest {
         Set<Coordinate> line = new HashSet<>();
         line.add(start);
 
-        boolean result = IState.pawnLine(start, Direction.E, line, board);
+        boolean result = IState.pawnLine(start, Direction.E, line, board, Team.BLACK);
 
         assertFalse(result, "pawnLine doit retourner false si moins de 5 pions sont alignés.");
     }

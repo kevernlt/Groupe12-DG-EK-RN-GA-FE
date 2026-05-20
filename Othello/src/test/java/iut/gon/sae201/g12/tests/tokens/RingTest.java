@@ -11,13 +11,13 @@ public class RingTest {
     @Test
     public void testCharReprBlack() {
         Ring ring = new Ring(Team.BLACK);
-        assertEquals("O", ring.charRepr(), "Un anneau noir doit être représenté par 'O'.");
+        assertEquals("\u001B[31mO\u001B[37m", ring.charRepr(), "Un anneau noir doit être représenté par '\u001B[31mO\u001B[37m'.");
     }
 
     @Test
     public void testCharReprWhite() {
         Ring ring = new Ring(Team.WHITE);
-        assertEquals("o", ring.charRepr(), "Un anneau blanc doit être représenté par 'o'.");
+        assertEquals("\u001B[34mo\u001B[37m", ring.charRepr(), "Un anneau blanc doit être représenté par '\u001B[34mo\u001B[37m'.");
     }
 
     @Test

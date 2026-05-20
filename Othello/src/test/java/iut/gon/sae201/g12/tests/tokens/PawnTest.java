@@ -11,13 +11,13 @@ public class PawnTest {
     @Test
     public void testCharReprBlack() {
         Pawn pawn = new Pawn(Team.BLACK);
-        assertEquals("x", pawn.charRepr(), "Un pion noir doit être représenté par 'x'.");
+        assertEquals("\u001B[31mX\u001B[37m", pawn.charRepr(), "Un pion noir doit être représenté par '\u001B[31mX\u001B[37m'.");
     }
 
     @Test
     public void testCharReprWhite() {
         Pawn pawn = new Pawn(Team.WHITE);
-        assertEquals(".", pawn.charRepr(), "Un pion blanc doit être représenté par '.'.");
+        assertEquals("\u001B[34mx\u001B[37m", pawn.charRepr(), "Un pion blanc doit être représenté par '\u001B[34mx\u001B[37m'.");
     }
 
     @Test
@@ -50,7 +50,7 @@ public class PawnTest {
     public void testChangeTeamUpdatesCharRepr() {
         Pawn pawn = new Pawn(Team.BLACK);
         pawn.changeTeam();
-        assertEquals(".", pawn.charRepr(), "Après changeTeam, la représentation doit changer de 'x' à '.'.");
+        assertEquals("\u001B[34mx\u001B[37m", pawn.charRepr(), "Après changeTeam, la représentation doit changer de '\u001B[31mX\u001B[37m' à '\u001B[34mx\u001B[37m'.");
     }
 
     @Test
