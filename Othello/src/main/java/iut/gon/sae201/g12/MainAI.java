@@ -19,7 +19,7 @@ public class MainAI {
         IState state = factory.testState();
         manager.setGameState(state);
 
-        System.out.println(manager.renderBoard());
+        manager.showPlate();
 
         MinMaxAI ai = new MinMaxAI(5);
         Action chosen = ai.chooseMove(state);

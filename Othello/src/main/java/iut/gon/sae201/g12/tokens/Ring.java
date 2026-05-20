@@ -9,6 +9,6 @@ public class Ring extends Token {
 
     @Override
     public String charRepr() {
-        return this.team == Team.BLACK ? "O" : "o";
+        return this.team == Team.BLACK ? "\u001B[31mO\u001B[37m" : "\u001B[34mo\u001B[37m";
     }
 }

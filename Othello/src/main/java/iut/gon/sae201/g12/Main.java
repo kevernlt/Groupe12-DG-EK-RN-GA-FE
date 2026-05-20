@@ -44,6 +44,6 @@ public class Main {
 
         System.out.println("---- Configuration terminée ----");
 
-        gameManager.showPlate();
+        gameManager.showPlateWithCoo();
     }
 }
