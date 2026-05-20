@@ -61,5 +61,8 @@ public abstract class Coordinate {
 
     public abstract Coordinate SE(Mode mode);
 
-
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Coordinate co && this.to2DCoordinate().equals(co.to2DCoordinate());
+    }
 }
