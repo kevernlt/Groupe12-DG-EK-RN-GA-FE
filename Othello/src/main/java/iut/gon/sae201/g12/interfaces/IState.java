@@ -25,5 +25,11 @@ public interface IState {
 
     public Team turn();
 
-    public List<Set<Coordinate>> getPawnsLines(Map<Coordinate,Token> board);
+    public IState removeToken(Coordinate c);
+
+    public IState toggleToken(Coordinate c, Class<Token> tokenClass,Team team);
+
+    public static List<Set<Coordinate>> getPawnsLines(Map<Coordinate, Token> board) {
+        return null;
+    }
 }

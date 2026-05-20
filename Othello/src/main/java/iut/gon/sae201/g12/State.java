@@ -13,6 +13,8 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     }
 
     public Team winner() {
+        if(rings().get(Team.WHITE).size()<=2)return Team.WHITE;
+        if(rings().get(Team.BLACK).size()<=2)return Team.BLACK;
         return null;
     }
 
@@ -79,17 +81,17 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
         return moves;
     }
 
-    public void keepGoing(Set<Coordinate> coordsSet, Coordinate from, Direction direction,boolean pawn) {
+    public void keepGoing(Set<Coordinate> coordsSet, Coordinate from, Direction direction,boolean pion) {
         Coordinate to = from.toDir(Mode.POINTY, direction);
         if (!isInField(to)) return;
         if (board.get(to) instanceof Ring) return;
         if (!(board.get(to) instanceof Pawn)){
             coordsSet.add(to);
+            if(pion)return;
         } else {
-            pawn=true;
+            pion=true;
         }
-        if(pawn)return;
-        keepGoing(coordsSet, from, direction,pawn);
+        keepGoing(coordsSet, from, direction,pion);
     }
 
 
@@ -100,12 +102,35 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
 
     @Override
     public Map<Team, List<Coordinate>> rings() {
-        return null;
+        HashMap<Team,List<Coordinate>> ring = new HashMap<>();
+        ArrayList<Coordinate> whiteRing = new ArrayList<>();
+        ArrayList<Coordinate> blackRing = new ArrayList<>();
+        for(Coordinate c: board.keySet()){
+            if(board.get(c) instanceof Ring && board.get(c).getTeam()==Team.WHITE)whiteRing.add(c);
+            if(board.get(c) instanceof Ring && board.get(c).getTeam()==Team.BLACK)blackRing.add(c);
+        }
+        ring.put(Team.WHITE,whiteRing);
+        ring.put(Team.BLACK,blackRing);
+        return ring;
     }
 
     @Override
     public List<Set<Coordinate>> lines() {
-        return null;
+        HashSet<Coordinate> line = new HashSet<>();
+        for
+    }
+
+    public boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line){
+        Coordinate to = c.toDir(Mode.POINTY,direction);
+        if(board.get(to)instanceof Pawn){
+            line.add(to);
+            if(line.size()==5){
+                return true;
+            } else {
+                return pawnLine(to,direction,line);
+            }
+        }
+        return false;
     }
 
     @Override
@@ -114,7 +139,17 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     }
 
     @Override
-    public List<Set<Coordinate>> getPawnsLines(Map<Coordinate, Token> board) {
+    public IState removeToken(Coordinate c) {
+        Token t = board.get(c);
+        if(t!=null){
+            board.remove(c);
+            board.put(c,null);
+        }
+        return this;
+    }
+
+    @Override
+    public IState toggleToken(Coordinate c, Class<Token> tokenClass, Team team) {
         return null;
     }
 }
