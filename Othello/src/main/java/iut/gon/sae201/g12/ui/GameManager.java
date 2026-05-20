@@ -41,7 +41,7 @@ public class GameManager {
 
         Map<Point, Token> board2 = new HashMap<>();
 
-        for (Map.Entry<Coordinate, Token> entry : this.gameState.getBoard().entrySet()) {
+        for (Map.Entry<Coordinate, Token> entry : this.gameState.board().entrySet()) {
 
             board2.put(entry.getKey().to2DCoordinate(), entry.getValue());
         }
@@ -89,7 +89,9 @@ public class GameManager {
                     case 3 :
                         System.out.print("    ");
                         break;
-
+                    case 4 :
+                        System.out.print("\\   ");
+                        break;
                     default:
                         System.out.print(" ___");
 
