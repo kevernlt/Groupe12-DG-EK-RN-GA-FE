@@ -1,12 +1,14 @@
 package iut.gon.sae201.g12;
 
 import iut.gon.sae201.g12.actions.Move;
-import iut.gon.sae201.g12.interfaces.IState;
+import iut.gon.sae201.g12.actions.RemoveLine;
 import iut.gon.sae201.g12.tokens.Pawn;
 import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.Coordinate;
+import iut.gon.sae201.g12.utils.IState;
 import iut.gon.sae201.g12.utils.Team;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,7 @@ public class Model {
         return this.currentState.availableMoves(from);
     }
 
-    public void moveRing(Coordinate from,Coordinate to){
+    public void moveRing(Coordinate from,Coordinate to) throws InvocationTargetException, InstantiationException, IllegalAccessException {
         Move move = new Move(from,to);
         this.currentState = this.currentState.move(move);
     }
@@ -36,11 +38,11 @@ public class Model {
         return this.currentState.lines();    }
 
     public void removeLine(Set<Coordinate> line,Coordinate ring){
-        this.currentState = this.currentState.removeLine(line, ring);
+        this.currentState = this.currentState.removeLine(new RemoveLine(line, ring));
     }
 
     public Map<Coordinate,Token> getBoard(){
-        return this.currentState.getBoard();
+        return this.currentState.board();
     }
 
     public Token getTokenAt(Coordinate c){
@@ -66,6 +68,6 @@ public class Model {
     }
 
     public Team getTurn(){
-        return this.currentState.getCurrentTeam();
+        return this.currentState.turn();
     }
 }
