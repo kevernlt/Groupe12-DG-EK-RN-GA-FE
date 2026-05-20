@@ -30,21 +30,18 @@ public class FactoryCube implements IFactory {
     }
 
     private Map<Coordinate, Token> initializeEmptyBoard() {
-        Set<CoordinateCube> temp = new HashSet<>();
+        Map<Coordinate, Token> temp = new HashMap<>();
 
-        // Board is 11 lines (0-10) like in FactoryDoubled
+        // Board is 11 lines (0-10)
         for (int i = 0; i <= 10; i++) {
             for (int j = boardPoses[i][0]; j <= boardPoses[i][1]; j += 2) {
-                temp.add(fromDoubled(i, j));
+                temp.put(new CoordinateDoubled(i, j), null);
             }
         }
 
-        return temp.stream()
-                .map(c -> new CoordinateCube(c.getQ(), c.getR(), c.getS()))
-                .collect(
-                        Collectors.toMap(c -> c, _var -> null)
-                );
+        return temp;
     }
+
 
     @Override
     public IState testState() {
