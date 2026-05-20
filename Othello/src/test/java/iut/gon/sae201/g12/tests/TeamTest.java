@@ -1,4 +1,4 @@
-package iut.gon.sae201.g12;
+package iut.gon.sae201.g12.tests;
 
 import iut.gon.sae201.g12.utils.Team;
 import org.junit.jupiter.api.Test;

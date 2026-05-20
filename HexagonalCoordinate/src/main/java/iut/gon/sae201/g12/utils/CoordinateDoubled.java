@@ -2,11 +2,13 @@ package iut.gon.sae201.g12.utils;
 
 import iut.gon.sae201.g12.exceptions.DifferentAxisExeption;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
@@ -138,4 +140,13 @@ public class CoordinateDoubled extends Coordinate {
         }
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(to2DCoordinate());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj.hashCode() == hashCode();
+    }
 }

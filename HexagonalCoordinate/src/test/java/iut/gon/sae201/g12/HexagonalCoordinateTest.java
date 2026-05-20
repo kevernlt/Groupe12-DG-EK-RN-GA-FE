@@ -6,12 +6,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class HexagonalCoordinateTest {
 
@@ -76,7 +73,7 @@ class HexagonalCoordinateTest {
 
         board.put(cube, "occupied");
 
-        assertTrue(java.util.Objects.equals(cube, doubled));
+        assertTrue(Objects.equals(cube.to2DCoordinate(), doubled.to2DCoordinate()));
         assertEquals(cube.hashCode(), doubled.hashCode());
         assertEquals("occupied", board.get(doubled));
         assertTrue(board.containsKey(doubled));

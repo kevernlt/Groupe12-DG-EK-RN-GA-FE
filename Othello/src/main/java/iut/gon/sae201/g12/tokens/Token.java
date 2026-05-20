@@ -5,16 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
-public abstract class Token {
+public abstract class Token implements Cloneable {
+    @Getter
+    @Setter
     protected Team team;
 
     public abstract String charRepr();
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Token clone() throws CloneNotSupportedException {
+        return (Token) super.clone();
     }
 }
