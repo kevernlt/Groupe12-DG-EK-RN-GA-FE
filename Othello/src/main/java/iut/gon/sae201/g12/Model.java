@@ -1,9 +1,13 @@
 package iut.gon.sae201.g12;
 
+import iut.gon.sae201.g12.actions.Move;
 import iut.gon.sae201.g12.interfaces.IState;
+import iut.gon.sae201.g12.tokens.Pawn;
 import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.Coordinate;
+import iut.gon.sae201.g12.utils.Team;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,12 +24,12 @@ public class Model {
     }
 
     public Set<Coordinate> movesFrom(Coordinate from, Coordinate to) {
-        this.currentState.availableMoves(from);
+        return this.currentState.availableMoves(from);
     }
 
     public void moveRing(Coordinate from,Coordinate to){
         Move move = new Move(from,to);
-        this.currentState.move(move);
+        this.currentState = this.currentState.move(move);
     }
 
     public List<Set<Coordinate>> getPawnsLines(){
@@ -49,13 +53,17 @@ public class Model {
     }
 
     public List<Coordinate> getRings(Team team){
-        /*Map : entrySet(), getValue().getTeam()-->Token ALED*/
-        return null;
+        return this.currentState.rings().get(team);
     }
 
-    public List<Coordinate> getPawns(Team team){
-        /*IState : lines()  ALED*/
-        return null;
+    public List<Coordinate> getPawns(Team team) {
+        List<Coordinate> result = new ArrayList<>();
+        for (Map.Entry<Coordinate, Token> entry : getBoard().entrySet()) {
+            if (entry.getValue() instanceof Pawn && entry.getValue().getTeam().equals(team)) {
+                result.add(entry.getKey());
+            }
+        }
+        return result;
     }
 
     public Team getTurn(){
