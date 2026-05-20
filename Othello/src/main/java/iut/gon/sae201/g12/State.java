@@ -3,6 +3,8 @@ package iut.gon.sae201.g12;
 import iut.gon.sae201.g12.interfaces.IState;
 import iut.gon.sae201.g12.utils.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate>> lines) implements IState {
@@ -35,14 +37,14 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     }
 
     @Override
-    public IState move(Move move) throws IllegalArgumentException, IndexOutOfBoundsException, RuntimeException {
+    public IState move(Move move) throws RuntimeException, InvocationTargetException, InstantiationException, IllegalAccessException {
         if (!availableMoves(move.getFrom()).contains(move.getTo())) throw new IllegalArgumentException();
         if (rings().get(turn).contains(move.getFrom())) throw new IllegalArgumentException();
         if (isInField(move.getTo())) throw new IndexOutOfBoundsException();
         if (!getPawnsLines(board) == null) throw new RuntimeException();
-        toggleToken(move.getTo(), turn,//ring);
+        toggleToken(move.getTo(), Ring.class,turn);
         removeToken(move.getFrom());
-        toggleToken(move.getFrom(), turn,//pawn);
+        toggleToken(move.getFrom(), Pawn.class,turn);
         return this;
     }
 
@@ -116,21 +118,22 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     @Override
     public List<Set<Coordinate>> lines() {
         ArrayList<Set<Coordinate>> line = new ArrayList<>();
-        for(int r=-5;r<=5;r++){
-            for(int q=-5;q<=5;q++){
-                for(int s=-5;s<=5;s++){
-                    HashSet<Coordinate> tryLine = new HashSet<>();
-                    Coordinate c = new CoordinateCube(q,r,s);
-                    if(pawnLine(c,Direction.E,tryLine)){
-                        line.add(tryLine);
-                    }
-                    if(pawnLine(c,Direction.SE,tryLine)){
-                        line.add(tryLine);
-                    }
-                    if(pawnLine(c,Direction.NE,tryLine)){
-                        line.add(tryLine);
-                    }
-                }
+        HashSet<Coordinate> pawn = new HashSet<>();
+        for(Coordinate c : board.keySet()){
+            if(board.get(c) instanceof Pawn){
+                pawn.add(c);
+            }
+        }
+        for(Coordinate c : pawn){
+            HashSet<Coordinate> tryLine = new HashSet<>();
+            if(pawnLine(c,Direction.E,tryLine)){
+                line.add(tryLine);
+            }
+            if(pawnLine(c,Direction.SE,tryLine)){
+                line.add(tryLine);
+            }
+            if(pawnLine(c,Direction.NE,tryLine)){
+                line.add(tryLine);
             }
         }
         return line;
@@ -166,7 +169,10 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
     }
 
     @Override
-    public IState toggleToken(Coordinate c, Class<Token> tokenClass, Team team) {
-        return null;
+    public IState toggleToken(Coordinate c, Class<? extends Token> tokenClass, Team team) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        Constructor<?> constructor = tokenClass.getConstructors()[0];
+        Token token = (Token) constructor.newInstance(team);
+        if(token.getTeam() == board.get(c).getTeam() && token.getClass() == board.get(c).getClass())removeToken(c);
+        return this;
     }
 }
