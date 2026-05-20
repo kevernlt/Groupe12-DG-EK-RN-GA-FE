@@ -11,7 +11,28 @@ import iut.gon.sae201.g12.utils.*;
 import java.util.*;
 
 public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate>> lines) implements IState {
+    private static final int[][] BOARD_POSES = {
+            {6, 12}, {3, 15}, {2, 16}, {1, 17}, {0, 18},
+            {1, 17}, {0, 18}, {1, 17}, {2, 16}, {3, 15}, {6, 12}
+    };
+
     public boolean isInField(Coordinate c) {
+        if (c == null) return false;
+
+        if (c instanceof CoordinateCube cube && (cube.getQ() + cube.getR() + cube.getS() != 0)) {
+            return false;
+        }
+
+        Point p = c.to2DCoordinate();
+        int x = p.x();
+        int y = p.y();
+        if (x < 0 || x >= BOARD_POSES.length) return false;
+
+        int minY = BOARD_POSES[x][0];
+        int maxY = BOARD_POSES[x][1];
+        if (y < minY || y > maxY) return false;
+        if ((y - minY) % 2 != 0) return false;
+
         return board.containsKey(c);
     }
 
@@ -94,7 +115,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
         } else {
             pion=true;
         }
-        keepGoing(coordsSet, from, direction,pion);
+        keepGoing(coordsSet, to, direction,pion);
     }
 
 
