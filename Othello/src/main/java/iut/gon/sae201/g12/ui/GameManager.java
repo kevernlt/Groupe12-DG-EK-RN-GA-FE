@@ -111,14 +111,4 @@ public class GameManager {
         return builder.toString();
     }
 
-    public enum PlayMode {
-        PLAYER_VERSUS,
-        AI_VERSUS;
-    }
-
-    public enum DimensionMode {
-        CUBE,
-        DOUBLED;
-    }
-
 }
