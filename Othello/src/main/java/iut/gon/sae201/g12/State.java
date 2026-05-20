@@ -137,7 +137,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
 
     @Override
     public List<Set<Coordinate>> lines() {
-        return IState.getPawnsLines(board);
+        return lines;
     }
 
 
