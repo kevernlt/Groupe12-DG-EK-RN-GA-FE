@@ -1,5 +1,5 @@
 package iut.gon.sae201.g12.actions;
-
+import iut.gon.sae201.g12.actions.Action;
 import iut.gon.sae201.g12.utils.Coordinate;
 
 public class Move extends Action {
@@ -20,11 +20,9 @@ public class Move extends Action {
         return this.to;
     }
 
-    public Coordinate SetFrom(Coordinate newFrom) {
-        return this.from = newFrom;
+    public void SetFrom(Coordinate from) {
+        this.from = from;
     }
 
-    public Coordinate SetTo(Coordinate newTo) {
-        return this.to = newTo;
-    }
+    public void SetTo(Coordinate to) {this.to = to;}
 }

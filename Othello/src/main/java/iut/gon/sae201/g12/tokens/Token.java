@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 @AllArgsConstructor
 public abstract class Token {
-    @Getter
-    @Setter
     protected Team team;
 
     public abstract String charRepr();
