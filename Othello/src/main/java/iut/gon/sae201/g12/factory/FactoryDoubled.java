@@ -9,6 +9,12 @@ import iut.gon.sae201.g12.utils.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Factory pour créer des états de test en utilisant le modèle hexagonal Doubled.
+ *
+ * <p>Fournit des états préconfigurés pour les tests de jeu Othello/Reversi
+ * basés sur la représentation de coordonnées doubled.
+ */
 public class FactoryDoubled implements IFactory {
 
     private final int[][] boardPoses = {{6, 12}, // on line 0, x cells go from 6 to 12

@@ -12,18 +12,48 @@ import lombok.Setter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Gestionnaire du jeu Othello.
+ *
+ * <p>Encapsule la configuration du jeu (mode de plateau, mode de jeu, système
+ * de coordonnées) et fournit les méthodes d'affichage du plateau.
+ */
 public class GameManager {
+    /**
+     * Énumération des modes de jeu.
+     */
+    public enum PlayMode {
+        PLAYER_VERSUS,
+        AI_VERSUS
+    }
+
+    /**
+     * Énumération des systèmes de coordonnées disponibles.
+     */
+    public enum DimensionMode {
+        CUBE,
+        DOUBLED
+    }
+
+    /** La factory utilisée pour créer les états du jeu */
     @Getter
     IFactory factory;
+    /** L'état actuel du jeu */
     @Setter
     IState gameState;
+    /** Le mode de jeu (joueur vs joueur ou joueur vs IA) */
     @Setter
     PlayMode playMode;
+    /** Le mode d'orientation du plateau hexagonal */
     @Setter
     Mode boardMode;
+    /** Le système de coordonnées */
     @Setter
     DimensionMode dimensionMode;
 
+    /**
+     * Construit la factory appropriée selon le mode de dimension.
+     */
     public void buildBoardFactory() {
         if (this.dimensionMode.equals(DimensionMode.CUBE)) {
             this.factory = new FactoryCube();
@@ -33,10 +63,18 @@ public class GameManager {
         }
     }
 
+    /**
+     * Affiche le plateau de jeu dans le terminal.
+     */
     public void showPlate() {
         System.out.print(renderBoard());
     }
 
+    /**
+     * Génère une représentation textuelle du plateau de jeu.
+     *
+     * @return une chaîne représentant le plateau avec les pièces
+     */
     public String renderBoard() {
         Map<Point, Token> board = new HashMap<>();
         for (Map.Entry<Coordinate, Token> entry : this.gameState.board().entrySet()) {

@@ -36,12 +36,6 @@ public class CoordinateDoubled extends Coordinate {
     }
 
     /**
-            /**
-             * Déplace la coordonnée vers le nord-ouest.
-             *
-             * @param mode le mode d'orientation
-             * @return la nouvelle coordonnée
-             */
      * Calcule les coordonnées strictement entre cette coordonnée et {@code to}
      * selon la géométrie "doubled". Lance {@link DifferentAxisExeption} si elles
      * ne sont pas sur un même axe valide.
