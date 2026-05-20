@@ -64,7 +64,12 @@ public class FactoryDoubled implements IFactory {
         board.replace(new CoordinateDoubled(10, 10), new Pawn(Team.WHITE));
         board.replace(new CoordinateDoubled(8, 6), new Pawn(Team.WHITE));
 
-        return null;
+        return new State(
+                board,
+                Team.BLACK,
+                new ArrayList<>()
+        );
+
     }
 
     @Override
@@ -114,7 +119,12 @@ public class FactoryDoubled implements IFactory {
         board.replace(new CoordinateDoubled(3, 9), new Pawn(Team.WHITE));
         board.replace(new CoordinateDoubled(8, 6), new Pawn(Team.WHITE));
         board.replace(new CoordinateDoubled(10, 10), new Pawn(Team.WHITE));
-        return null;
+        return new State(
+                board,
+                Team.BLACK,
+                new ArrayList<>()
+        );
+
     }
 
     @Override
@@ -168,7 +178,12 @@ public class FactoryDoubled implements IFactory {
         board.replace(new CoordinateDoubled(8, 6), new Pawn(Team.WHITE));
         board.replace(new CoordinateDoubled(10, 10), new Pawn(Team.WHITE));
 
-        return null;
+        return new State(
+                board,
+                Team.BLACK,
+                new ArrayList<>()
+        );
+
     }
 
     @Override
@@ -207,6 +222,11 @@ public class FactoryDoubled implements IFactory {
         board.replace(new CoordinateDoubled(3, 11), new Pawn(Team.BLACK));
         board.replace(new CoordinateDoubled(3, 13), new Pawn(Team.BLACK));
         board.replace(new CoordinateDoubled(4, 10), new Pawn(Team.BLACK));
-        return null;
+        return new State(
+                board,
+                Team.BLACK,
+                new ArrayList<>()
+        );
+
     }
 }
