@@ -1,9 +1,9 @@
-package iut.gon.sae201.g12.interfaces;
+package iut.gon.sae201.g12.utils;
 
-import iut.gon.sae201.g12.*;
-import iut.gon.sae201.g12.utils.Coordinate;
-import iut.gon.sae201.g12.utils.Direction;
-import iut.gon.sae201.g12.utils.Mode;
+import iut.gon.sae201.g12.actions.Move;
+import iut.gon.sae201.g12.actions.RemoveLine;
+import iut.gon.sae201.g12.tokens.Pawn;
+import iut.gon.sae201.g12.tokens.Token;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;

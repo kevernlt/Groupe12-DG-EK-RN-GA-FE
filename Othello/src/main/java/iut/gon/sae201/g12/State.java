@@ -1,6 +1,10 @@
 package iut.gon.sae201.g12;
 
-import iut.gon.sae201.g12.interfaces.IState;
+import iut.gon.sae201.g12.actions.Move;
+import iut.gon.sae201.g12.actions.RemoveLine;
+import iut.gon.sae201.g12.tokens.Pawn;
+import iut.gon.sae201.g12.tokens.Ring;
+import iut.gon.sae201.g12.tokens.Token;
 import iut.gon.sae201.g12.utils.*;
 
 import java.lang.reflect.Constructor;
@@ -44,8 +48,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
         State other = (State) o;
         if (!board.equals(other.board)) return false;
         if (!turn.equals(other.turn)) return false;
-        if (!lines.equals(other.lines)) return false;
-        return true;
+        return lines.equals(other.lines);
     }
 
     @Override
