@@ -8,9 +8,26 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate>> lines) implements IState {
-    public boolean isInField(Coordinate c) {
-        if(board.containsKey(c))return true;
-        return false;
+    private static final int[][] BOARD_POSES = {
+            {6, 12}, {3, 15}, {2, 16}, {1, 17}, {0, 18},
+            {1, 17}, {0, 18}, {1, 17}, {2, 16}, {3, 15}, {6, 12}
+    };
+    public static boolean isInField(Coordinate c) {
+        if (c == null) return false;
+
+        if (c instanceof CoordinateCube cube && (cube.getQ() + cube.getR() + cube.getS() != 0)) {
+            return false;
+        }
+
+        Point p = c.to2DCoordinate();
+        int x = p.x();
+        int y = p.y();
+        if (x < 0 || x >= BOARD_POSES.length) return false;
+
+        int minY = BOARD_POSES[x][0];
+        int maxY = BOARD_POSES[x][1];
+        if (y < minY || y > maxY) return false;
+        return (y - minY) % 2 == 0;
     }
 
     public Team winner() {
@@ -41,7 +58,7 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
         if (!availableMoves(move.getFrom()).contains(move.getTo())) throw new IllegalArgumentException();
         if (rings().get(turn).contains(move.getFrom())) throw new IllegalArgumentException();
         if (isInField(move.getTo())) throw new IndexOutOfBoundsException();
-        if (!getPawnsLines(board) == null) throw new RuntimeException();
+        if (!(lines == null)) throw new RuntimeException();
         toggleToken(move.getTo(), Ring.class,turn);
         removeToken(move.getFrom());
         toggleToken(move.getFrom(), Pawn.class,turn);
@@ -117,41 +134,10 @@ public record State(Map<Coordinate, Token> board, Team turn, List<Set<Coordinate
 
     @Override
     public List<Set<Coordinate>> lines() {
-        ArrayList<Set<Coordinate>> line = new ArrayList<>();
-        HashSet<Coordinate> pawn = new HashSet<>();
-        for(Coordinate c : board.keySet()){
-            if(board.get(c) instanceof Pawn){
-                pawn.add(c);
-            }
-        }
-        for(Coordinate c : pawn){
-            HashSet<Coordinate> tryLine = new HashSet<>();
-            if(pawnLine(c,Direction.E,tryLine)){
-                line.add(tryLine);
-            }
-            if(pawnLine(c,Direction.SE,tryLine)){
-                line.add(tryLine);
-            }
-            if(pawnLine(c,Direction.NE,tryLine)){
-                line.add(tryLine);
-            }
-        }
-        return line;
+        return IState.getPawnsLines(board);
     }
 
-    public boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line){
-        if(!isInField(c))return false;
-        Coordinate to = c.toDir(Mode.POINTY,direction);
-        if(board.get(to)instanceof Pawn){
-            line.add(to);
-            if(line.size()==5){
-                return true;
-            } else {
-                return pawnLine(to,direction,line);
-            }
-        }
-        return false;
-    }
+
 
     @Override
     public Team turn() {

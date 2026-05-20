@@ -1,15 +1,14 @@
 package iut.gon.sae201.g12.interfaces;
 
-import iut.gon.sae201.g12.Move;
-import iut.gon.sae201.g12.RemoveLine;
-import iut.gon.sae201.g12.Team;
-import iut.gon.sae201.g12.Token;
+import iut.gon.sae201.g12.*;
 import iut.gon.sae201.g12.utils.Coordinate;
+import iut.gon.sae201.g12.utils.Direction;
+import iut.gon.sae201.g12.utils.Mode;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
+import static iut.gon.sae201.g12.State.isInField;
 
 public interface IState {
     public IState move(Move move) throws InvocationTargetException, InstantiationException, IllegalAccessException;
@@ -28,9 +27,47 @@ public interface IState {
 
     public IState removeToken(Coordinate c);
 
-    public IState toggleToken(Coordinate c, Class<? extends Token> tokenClass,Team team) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException;
+    public IState toggleToken(Coordinate c, Class<? extends Token> tokenClass, Team team) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException;
 
     public static List<Set<Coordinate>> getPawnsLines(Map<Coordinate, Token> board) {
-        return null;
+        ArrayList<Set<Coordinate>> line = new ArrayList<>();
+        HashSet<Coordinate> pawn = new HashSet<>();
+        for (Coordinate c : board.keySet()) {
+            if (board.get(c) instanceof Pawn) {
+                pawn.add(c);
+            }
+        }
+        for (Coordinate c : pawn) {
+            HashSet<Coordinate> tryLine = new HashSet<>();
+            tryLine.add(c);
+            if (pawnLine(c, Direction.E, tryLine, board)) {
+                line.add(tryLine);
+            }
+            tryLine.clear();
+            tryLine.add(c);
+            if (pawnLine(c, Direction.SE, tryLine, board)) {
+                line.add(tryLine);
+            }
+            tryLine.clear();
+            tryLine.add(c);
+            if (pawnLine(c, Direction.NE, tryLine, board)) {
+                line.add(tryLine);
+            }
+        }
+        return line;
+    }
+
+    public static boolean pawnLine(Coordinate c, Direction direction, Set<Coordinate> line, Map<Coordinate, Token> board) {
+        if (!isInField(c)) return false;
+        Coordinate to = c.toDir(Mode.POINTY, direction);
+        if (board.get(to) instanceof Pawn) {
+            line.add(to);
+            if (line.size() == 5) {
+                return true;
+            } else {
+                return pawnLine(to, direction, line, board);
+            }
+        }
+        return false;
     }
 }
